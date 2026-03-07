@@ -37,7 +37,7 @@
                             x-show="screen === 'quiz'"
                             x-cloak
                         >
-                            Hello, <span x-text="name"></span>!
+                            Bonjour, <span x-text="name"></span> !
                         </small>
                     </div>
                     <button
@@ -45,9 +45,9 @@
                         x-show="screen !== 'name'"
                         x-cloak
                         @click="restart()"
-                        title="Restart quiz"
+                        title="Recommencer le quiz"
                     >
-                        ↺ Restart
+                        ↺ Recommencer
                     </button>
                 </div>
 
@@ -55,7 +55,7 @@
                 <div class="mt-3" x-show="screen === 'quiz'" x-cloak>
                     <div class="d-flex justify-content-between mb-1">
                         <small class="opacity-75">
-                            Question <span x-text="currentIndex + 1"></span> of
+                            Question <span x-text="currentIndex + 1"></span> sur
                             <span x-text="config.questions.length"></span>
                         </small>
                         <small
@@ -75,17 +75,17 @@
 
             <!-- ── Name Screen ─────────────────────────────── -->
             <div class="card-body" x-show="screen === 'name'">
-                <h5 class="mb-1">Welcome!</h5>
+                <h5 class="mb-1">Bienvenue !</h5>
                 <p class="text-muted mb-4">
-                    Enter your name to start the quiz.
+                    Entrez votre nom pour commencer le quiz.
                 </p>
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Your name</label>
+                    <label class="form-label fw-semibold">Votre nom</label>
                     <input
                         class="form-control answer-input"
                         type="text"
-                        placeholder="e.g. Alice"
+                        placeholder="ex. Alice"
                         x-model="name"
                         @keydown.enter="startQuiz()"
                         autofocus
@@ -97,7 +97,7 @@
                     :disabled="!name.trim()"
                     @click="startQuiz()"
                 >
-                    Start Quiz →
+                    Commencer le quiz →
                 </button>
             </div>
 
@@ -127,7 +127,7 @@
                             class="btn btn-primary px-4 fw-semibold"
                             @click="submitAnswer()"
                         >
-                            Submit
+                            Valider
                         </button>
                     </div>
 
@@ -137,7 +137,7 @@
                         x-show="wrongAnswer"
                         x-cloak
                     >
-                        ✗ Not quite — try again!
+                        ✗ Ce n'est pas ça — réessayez !
                     </div>
                 </div>
 
@@ -148,7 +148,7 @@
                         @click="showHint = !showHint"
                     >
                         <span
-                            x-text="showHint ? '▲ Hide hint' : '💡 Show hint'"
+                            x-text="showHint ? '▲ Masquer l\'indice' : '💡 Afficher l\'indice'"
                         ></span>
                     </button>
 
@@ -171,19 +171,19 @@
             >
                 <div class="star-emoji mb-3">🏆</div>
                 <h4 class="fw-bold mb-2">
-                    Congratulations, <span x-text="name"></span>!
+                    Félicitations, <span x-text="name"></span> !
                 </h4>
                 <p class="text-muted mb-4">
-                    You answered all
+                    Vous avez répondu correctement aux
                     <strong x-text="config.questions.length"></strong> questions
-                    correctly.<br />
-                    Well done!
+                    .<br />
+                    Bravo !
                 </p>
                 <button
                     class="btn btn-primary px-5 fw-semibold"
                     @click="restart()"
                 >
-                    Play Again
+                    Rejouer
                 </button>
             </div>
         </div>
