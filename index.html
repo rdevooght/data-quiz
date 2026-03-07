@@ -113,12 +113,11 @@
 
                 <!-- Answer input -->
                 <div class="mb-3" :class="{ shake: shaking }">
-                    <label class="form-label fw-semibold">Your answer</label>
                     <div class="input-group">
                         <input
                             class="form-control answer-input"
-                            type="text"
-                            placeholder="Type your answer…"
+                            :type="currentAnswerType"
+                            :placeholder="answerTypeRemark"
                             x-model="answer"
                             @keydown.enter="submitAnswer()"
                             x-ref="answerInput"
