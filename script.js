@@ -3,6 +3,62 @@
 // ─────────────────────────────────────────────────
 
 const STORAGE_KEY = "quizProgress";
+const UUID_KEY = "quizPersonId";
+const QUIZ_ID = 0;
+const API_BASE = "https://data-quizz.robin-de.workers.dev";
+
+// ── API helpers (fire-and-forget, errors only logged) ──
+
+async function apiSetName(personId, name) {
+  try {
+    const res = await fetch(`${API_BASE}/set_name`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: personId, name }),
+    });
+    if (!res.ok) console.error("[quiz] /set_name error", await res.text());
+  } catch (err) {
+    console.error("[quiz] /set_name failed", err);
+  }
+}
+
+async function apiAddAnswer(personId, questionId) {
+  try {
+    const res = await fetch(`${API_BASE}/add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        quiz_id: QUIZ_ID,
+        person_id: personId,
+        question_id: questionId,
+      }),
+    });
+    if (!res.ok) console.error("[quiz] /add error", await res.text());
+  } catch (err) {
+    console.error("[quiz] /add failed", err);
+  }
+}
+
+// ── UUID helpers ──
+
+function getOrCreatePersonId() {
+  let id = localStorage.getItem(UUID_KEY);
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem(UUID_KEY, id);
+  }
+  return id;
+}
+
+function resetPersonId() {
+  const id = crypto.randomUUID();
+  localStorage.setItem(UUID_KEY, id);
+  return id;
+}
+
+// ─────────────────────────────────────────────────
+//  Alpine component
+// ─────────────────────────────────────────────────
 
 function quizApp() {
   return {
@@ -12,6 +68,7 @@ function quizApp() {
     // ── State ───────────────────────────────────
     screen: "name", // 'name' | 'quiz' | 'done'
     name: "",
+    personId: null,
     currentIndex: 0,
     answer: "",
     showHint: false,
@@ -44,8 +101,10 @@ function quizApp() {
 
     // ── Lifecycle ───────────────────────────────
     init() {
-      // Set page title from config
       document.title = this.config.title;
+
+      // Get (or create) a stable UUID for this browser session
+      this.personId = getOrCreatePersonId();
 
       // Restore saved progress
       const saved = this.loadProgress();
@@ -64,6 +123,10 @@ function quizApp() {
       this.screen = "quiz";
       this.liveMessage = `Quiz commencé. Question 1 sur ${this.config.questions.length}.`;
       this.saveProgress();
+
+      // Post name to backend (non-blocking)
+      apiSetName(this.personId, this.name);
+
       this.$nextTick(() => this.$refs.answerInput.focus());
     },
 
@@ -88,6 +151,12 @@ function quizApp() {
       }
 
       if (isCorrect) {
+        // Post correct answer to backend (non-blocking)
+        apiAddAnswer(
+          this.personId,
+          this.currentQuestion.id ?? this.currentIndex,
+        );
+
         this.wrongAnswer = false;
         this.answer = "";
         this.showHint = false;
@@ -121,6 +190,8 @@ function quizApp() {
 
     restart() {
       localStorage.removeItem(STORAGE_KEY);
+      // Issue a fresh UUID so the new session is tracked independently
+      this.personId = resetPersonId();
       this.screen = "name";
       this.name = "";
       this.currentIndex = 0;
