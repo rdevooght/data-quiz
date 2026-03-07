@@ -1,0 +1,73 @@
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-card {
+    width: 100%;
+    max-width: 580px;
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-title {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1.5rem 2rem 1rem;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Shake animation for wrong answers */
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-8px);
+    }
+    40% {
+        transform: translateX(8px);
+    }
+    60% {
+        transform: translateX(-5px);
+    }
+    80% {
+        transform: translateX(5px);
+    }
+}
+.shake {
+    animation: shake 0.4s ease;
+}
+
+/* Hint box */
+.hint-box {
+    background: #f8f9ff;
+    border-left: 4px solid #667eea;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Progress bar */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+}
+
+/* Done screen star */
+.star-emoji {
+    font-size: 4rem;
+    line-height: 1;
+}
+
+/* Answer input focus ring */
+.answer-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+}

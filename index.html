@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title id="page-title">Quiz</title>
+
+        <!-- Bootstrap 5 -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        />
+
+        <!-- Marked.js (Markdown → HTML) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+
+        <!-- Alpine.js -->
+        <script
+            defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.1/cdn.min.js"
+        ></script>
+
+        <!-- Quiz config (must come before Alpine initialises) -->
+        <script src="config.js"></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <div class="quiz-card card border-0" x-data="quizApp()" x-init="init()">
+            <!-- ── Header ─────────────────────────────────── -->
+            <div class="quiz-title">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h4 class="mb-0 fw-bold" x-text="config.title"></h4>
+                        <small
+                            class="opacity-75"
+                            x-show="screen === 'quiz'"
+                            x-cloak
+                        >
+                            Hello, <span x-text="name"></span>!
+                        </small>
+                    </div>
+                    <button
+                        class="btn btn-sm btn-outline-light"
+                        x-show="screen !== 'name'"
+                        x-cloak
+                        @click="restart()"
+                        title="Restart quiz"
+                    >
+                        ↺ Restart
+                    </button>
+                </div>
+
+                <!-- Progress bar (quiz screen only) -->
+                <div class="mt-3" x-show="screen === 'quiz'" x-cloak>
+                    <div class="d-flex justify-content-between mb-1">
+                        <small class="opacity-75">
+                            Question <span x-text="currentIndex + 1"></span> of
+                            <span x-text="config.questions.length"></span>
+                        </small>
+                        <small
+                            class="opacity-75"
+                            x-text="Math.round(progress) + '%'"
+                        ></small>
+                    </div>
+                    <div class="progress bg-white bg-opacity-25">
+                        <div
+                            class="progress-bar bg-white"
+                            role="progressbar"
+                            :style="'width:' + progress + '%'"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Name Screen ─────────────────────────────── -->
+            <div class="card-body" x-show="screen === 'name'">
+                <h5 class="mb-1">Welcome!</h5>
+                <p class="text-muted mb-4">
+                    Enter your name to start the quiz.
+                </p>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Your name</label>
+                    <input
+                        class="form-control answer-input"
+                        type="text"
+                        placeholder="e.g. Alice"
+                        x-model="name"
+                        @keydown.enter="startQuiz()"
+                        autofocus
+                    />
+                </div>
+
+                <button
+                    class="btn btn-primary w-100 fw-semibold"
+                    :disabled="!name.trim()"
+                    @click="startQuiz()"
+                >
+                    Start Quiz →
+                </button>
+            </div>
+
+            <!-- ── Quiz Screen ─────────────────────────────── -->
+            <div class="card-body" x-show="screen === 'quiz'" x-cloak>
+                <!-- Question -->
+                <p
+                    class="text-muted small mb-1 text-uppercase fw-semibold tracking-wide"
+                >
+                    Question <span x-text="currentIndex + 1"></span>
+                </p>
+                <h5 class="mb-4" x-text="currentQuestion.question"></h5>
+
+                <!-- Answer input -->
+                <div class="mb-3" :class="{ shake: shaking }">
+                    <label class="form-label fw-semibold">Your answer</label>
+                    <div class="input-group">
+                        <input
+                            class="form-control answer-input"
+                            type="text"
+                            placeholder="Type your answer…"
+                            x-model="answer"
+                            @keydown.enter="submitAnswer()"
+                            x-ref="answerInput"
+                            autocomplete="off"
+                        />
+                        <button
+                            class="btn btn-primary px-4 fw-semibold"
+                            @click="submitAnswer()"
+                        >
+                            Submit
+                        </button>
+                    </div>
+
+                    <!-- Wrong answer feedback -->
+                    <div
+                        class="text-danger small mt-1 fw-semibold"
+                        x-show="wrongAnswer"
+                        x-cloak
+                    >
+                        ✗ Not quite — try again!
+                    </div>
+                </div>
+
+                <!-- Hint toggle -->
+                <div class="mt-4">
+                    <button
+                        class="btn btn-sm btn-outline-secondary"
+                        @click="showHint = !showHint"
+                    >
+                        <span
+                            x-text="showHint ? '▲ Hide hint' : '💡 Show hint'"
+                        ></span>
+                    </button>
+
+                    <div
+                        class="hint-box p-3 mt-2"
+                        x-show="showHint"
+                        x-cloak
+                        x-transition
+                    >
+                        <div class="small" x-html="renderedHint"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Done Screen ─────────────────────────────── -->
+            <div
+                class="card-body text-center py-5"
+                x-show="screen === 'done'"
+                x-cloak
+            >
+                <div class="star-emoji mb-3">🏆</div>
+                <h4 class="fw-bold mb-2">
+                    Congratulations, <span x-text="name"></span>!
+                </h4>
+                <p class="text-muted mb-4">
+                    You answered all
+                    <strong x-text="config.questions.length"></strong> questions
+                    correctly.<br />
+                    Well done!
+                </p>
+                <button
+                    class="btn btn-primary px-5 fw-semibold"
+                    @click="restart()"
+                >
+                    Play Again
+                </button>
+            </div>
+        </div>
+        <!-- /quiz-card -->
+
+        <script src="script.js"></script>
+    </body>
+</html>
