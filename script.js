@@ -14,7 +14,7 @@ async function apiSetName(personId, name) {
     const res = await fetch(`${API_BASE}/set_name`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: personId, name }),
+      body: JSON.stringify({ id: personId, quiz_id: QUIZ_ID, name }),
     });
     if (!res.ok) console.error("[quiz] /set_name error", await res.text());
   } catch (err) {
@@ -205,10 +205,7 @@ function quizApp() {
     saveProgress() {
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({
-          name: this.name,
-          currentIndex: this.currentIndex,
-        }),
+        JSON.stringify({ name: this.name, currentIndex: this.currentIndex }),
       );
     },
 
