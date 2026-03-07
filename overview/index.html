@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quiz Overview</title>
+
+        <script
+            defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.1/cdn.min.js"
+        ></script>
+
+        <script src="../config.js"></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body x-data="overviewApp()" x-init="init()">
+        <header>
+            <div>
+                <h1 x-text="config.title || 'Quiz Overview'"></h1>
+                <div class="subtitle">
+                    live overview &nbsp;·&nbsp;
+                    <span x-text="config.questions.length"></span> questions
+                </div>
+            </div>
+            <span class="pulse-dot" title="polling every 5s"></span>
+        </header>
+
+        <!-- Labels -->
+        <div class="track-labels">
+            <span class="label-name">Participant</span>
+            <span class="label-track">
+                <span>Start</span>
+                <span>Finish</span>
+            </span>
+        </div>
+        <div class="divider"></div>
+
+        <!-- Participant rows -->
+        <div class="track-wrapper">
+            <template x-if="participants.length === 0 && !error">
+                <p class="state-msg">Waiting for participants…</p>
+            </template>
+            <template x-if="error">
+                <p class="state-msg" x-text="error"></p>
+            </template>
+
+            <template x-for="p in participants" :key="p.person_id">
+                <div class="participant-row">
+                    <!-- Name -->
+                    <div
+                        class="p-name"
+                        :class="{ unnamed: !p.person_name }"
+                        x-text="p.person_name || 'anonymous'"
+                    ></div>
+
+                    <!-- Track -->
+                    <div class="track">
+                        <div class="line line-start"></div>
+                        <div class="line line-finish"></div>
+
+                        <!-- Trail -->
+                        <div
+                            class="trail"
+                            :class="{ 'at-finish': progress(p) >= 1 }"
+                            :style="`width: calc(${progress(p) * 100}% )`"
+                        ></div>
+
+                        <!-- Runner dot -->
+                        <div
+                            class="runner-wrap"
+                            :style="`left: ${progress(p) * 100}%`"
+                        >
+                            <div
+                                class="runner-dot"
+                                :class="{
+                'at-finish':   progress(p) >= 1,
+                'not-started': p.question_id == null
+              }"
+                            ></div>
+                            <span
+                                class="q-label"
+                                x-text="p.question_id != null ? 'Q' + p.question_id : ''"
+                            ></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <footer x-text="`Last updated: ${lastUpdated || '—'}`"></footer>
+        <script src="script.js"></script>
+    </body>
+</html>

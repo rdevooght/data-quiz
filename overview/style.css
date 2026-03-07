@@ -1,0 +1,226 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #272727;
+    --text: #e8e8e8;
+    --muted: #555;
+    --accent: #e8ff47; /* single pop of colour */
+    --finish: #ff6b3d;
+    --track: #1c1c1c;
+    --dot-size: 10px;
+    --row-h: 56px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "DM Mono", monospace;
+    min-height: 100vh;
+    padding: 40px 32px 60px;
+}
+
+/* ── Header ── */
+header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 48px;
+}
+h1 {
+    font-family: "Syne", sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(0.7);
+    }
+}
+.subtitle {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ── Track layout ── */
+.track-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Column labels */
+.track-labels {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0 16px;
+    margin-bottom: 10px;
+    padding: 0 0 0 0;
+}
+.label-name {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.label-track {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 0;
+}
+
+/* Each row */
+.participant-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0 16px;
+    align-items: center;
+    height: var(--row-h);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+}
+.participant-row:hover {
+    background: var(--surface);
+}
+
+.p-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text);
+}
+.p-name.unnamed {
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* The race track */
+.track {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Start & finish lines */
+.line {
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+}
+.line-start {
+    left: 0;
+    background: var(--border);
+}
+.line-finish {
+    right: 0;
+    background: var(--finish);
+}
+
+/* The runner — positioned by inline style */
+.runner-wrap {
+    position: absolute;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.runner-dot {
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+.runner-dot.at-finish {
+    background: var(--finish);
+}
+.runner-dot.not-started {
+    background: transparent;
+    border: 2px solid var(--muted);
+}
+
+/* Progress trail */
+.trail {
+    position: absolute;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0.18;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1px;
+}
+.trail.at-finish {
+    background: var(--finish);
+}
+
+/* Q label on dot */
+.q-label {
+    position: absolute;
+    top: calc(50% - 18px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.58rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+/* Empty / error states */
+.state-msg {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 60px;
+    text-align: center;
+    letter-spacing: 0.08em;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+}
