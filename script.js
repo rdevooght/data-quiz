@@ -17,6 +17,7 @@ function quizApp() {
     showHint: false,
     shaking: false,
     wrongAnswer: false,
+    liveMessage: "",
 
     // ── Computed ────────────────────────────────
     get currentQuestion() {
@@ -61,6 +62,7 @@ function quizApp() {
       if (!this.name.trim()) return;
       this.name = this.name.trim();
       this.screen = "quiz";
+      this.liveMessage = `Quiz commencé. Question 1 sur ${this.config.questions.length}.`;
       this.saveProgress();
       this.$nextTick(() => this.$refs.answerInput.focus());
     },
@@ -93,6 +95,9 @@ function quizApp() {
 
         if (this.currentIndex >= this.config.questions.length) {
           this.screen = "done";
+          this.liveMessage = "Quiz terminé. Félicitations.";
+        } else {
+          this.liveMessage = `Bonne réponse. Question ${this.currentIndex + 1} sur ${this.config.questions.length}.`;
         }
 
         this.saveProgress();
@@ -101,6 +106,7 @@ function quizApp() {
         // Wrong answer: shake + clear input
         this.wrongAnswer = true;
         this.answer = "";
+        this.liveMessage = "Réponse incorrecte. Réessayez.";
         this.triggerShake();
         this.$nextTick(() => this.$refs.answerInput.focus());
       }
@@ -121,6 +127,7 @@ function quizApp() {
       this.answer = "";
       this.showHint = false;
       this.wrongAnswer = false;
+      this.liveMessage = "Quiz réinitialisé.";
     },
 
     // ── Persistence ─────────────────────────────

@@ -26,7 +26,18 @@
     </head>
 
     <body>
-        <div class="quiz-card card border-0" x-data="quizApp()" x-init="init()">
+        <main
+            class="quiz-card card border-0"
+            x-data="quizApp()"
+            x-init="init()"
+            aria-label="Quiz"
+        >
+            <div
+                class="visually-hidden"
+                role="status"
+                aria-live="polite"
+                x-text="liveMessage"
+            ></div>
             <!-- ── Header ─────────────────────────────────── -->
             <div class="quiz-title">
                 <div class="d-flex justify-content-between align-items-start">
@@ -41,6 +52,7 @@
                         </small>
                     </div>
                     <button
+                        type="button"
                         class="btn btn-sm btn-outline-light"
                         x-show="screen !== 'name'"
                         x-cloak
@@ -67,6 +79,10 @@
                         <div
                             class="progress-bar bg-white"
                             role="progressbar"
+                            :aria-valuenow="Math.round(progress)"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            aria-label="Progression du quiz"
                             :style="'width:' + progress + '%'"
                         ></div>
                     </div>
@@ -81,18 +97,23 @@
                 </p>
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Votre nom</label>
+                    <label class="form-label fw-semibold" for="name-input"
+                        >Votre nom</label
+                    >
                     <input
+                        id="name-input"
                         class="form-control answer-input"
                         type="text"
                         placeholder="ex. Alice"
                         x-model="name"
                         @keydown.enter="startQuiz()"
+                        autocomplete="name"
                         autofocus
                     />
                 </div>
 
                 <button
+                    type="button"
                     class="btn btn-primary w-100 fw-semibold"
                     :disabled="!name.trim()"
                     @click="startQuiz()"
@@ -113,17 +134,25 @@
 
                 <!-- Answer input -->
                 <div class="mb-3" :class="{ shake: shaking }">
+                    <label class="form-label fw-semibold" for="answer-input"
+                        >Votre réponse</label
+                    >
                     <div class="input-group">
                         <input
+                            id="answer-input"
                             class="form-control answer-input"
                             :type="currentAnswerType"
                             :placeholder="answerTypeRemark"
                             x-model="answer"
                             @keydown.enter="submitAnswer()"
                             x-ref="answerInput"
+                            :inputmode="currentAnswerType === 'number' ? 'numeric' : 'text'"
+                            :aria-invalid="wrongAnswer ? 'true' : 'false'"
+                            aria-describedby="answer-type-remark wrong-answer-feedback"
                             autocomplete="off"
                         />
                         <button
+                            type="button"
                             class="btn btn-primary px-4 fw-semibold"
                             @click="submitAnswer()"
                         >
@@ -133,9 +162,11 @@
 
                     <!-- Wrong answer feedback -->
                     <div
+                        id="wrong-answer-feedback"
                         class="text-danger small mt-1 fw-semibold"
                         x-show="wrongAnswer"
                         x-cloak
+                        role="alert"
                     >
                         ✗ Ce n'est pas ça — réessayez !
                     </div>
@@ -144,8 +175,11 @@
                 <!-- Hint toggle -->
                 <div class="mt-4">
                     <button
+                        type="button"
                         class="btn btn-sm btn-outline-secondary"
                         @click="showHint = !showHint"
+                        :aria-expanded="showHint ? 'true' : 'false'"
+                        aria-controls="hint-content"
                     >
                         <span
                             x-text="showHint ? '▲ Masquer l\'indice' : '💡 Afficher l\'indice'"
@@ -153,6 +187,7 @@
                     </button>
 
                     <div
+                        id="hint-content"
                         class="hint-box p-3 mt-2"
                         x-show="showHint"
                         x-cloak
@@ -180,13 +215,14 @@
                     Bravo !
                 </p>
                 <button
+                    type="button"
                     class="btn btn-primary px-5 fw-semibold"
                     @click="restart()"
                 >
                     Rejouer
                 </button>
             </div>
-        </div>
+        </main>
         <!-- /quiz-card -->
 
         <script src="script.js"></script>
