@@ -1,20 +1,31 @@
-// ─────────────────────────────────────────────
-//  Quiz Configuration
-//  Edit this file to customise your quiz.
-// ─────────────────────────────────────────────
-
 const quizConfig = {
-  title: "General Knowledge Quiz",
+  title: "Nettoyer et analyser des données",
 
   questions: [
     {
-      question: "What is the capital city of Japan?",
-      answer_type: "text",
-      answer: "Tokyo",
-      hint: `**Think geography!**
+      question: "Combien de colonnes y a-t-il dans le tableau ?",
+      answer_type: "number",
+      answer: "20",
+      hints: [
+        `Le fichier est de type CSV (comma separated value),
+ce qui veut dire que le fichier contient du texte et que chaque colonne est séparée par une virgule.
+Vous pouvez l'ouvrir dans un éditeur de texte comme bloc-note pour en voir le contenu,
+mais ce n'est pas pratique de travailler dans le fichier comme ça: il vaut mieux l'importer dans un tableur (LibreOffice, Google Sheets, Excel, ...).
 
-This city hosted the Summer Olympics **twice**: in 1964 and again in 2021.
-It is the most populous metropolitan area in the world.`,
+Voici comment faire dans Google Sheets:
+![Ouvrez le menu "Fichier", puis cliquez sur "Importer"](img/importer.png)
+Puis allez sur l'onglet "Importer" et déposez-y le fichier CSV:
+![Screenshot du menu d'importation](img/importer2.png)
+Vous pouvez garder les options par défaut et cliquer sur "Importer les données".
+`,
+        `Vous pouvez compter les colonnes manuellement, mais il y a une manière plus efficace de le faire:
+
+En cliquant sur le "1" à gauche de la première ligne, vous sélectionnez toute la première ligne.
+En bas à droite s'affiche toujours un résumé des cases sélectionnées.
+Comme ici les cases contiennent du texte, les tableur affichent en général le nombre de cases non-vides.
+C'est le nombre de colonnes de notre tableau !
+![Screenshot illustrant l'explication ci-dessus](img/importer2.png)`,
+      ],
     },
     {
       question: "How many sides does a hexagon have?",
@@ -26,7 +37,7 @@ Compare with: *triangle* (3), *quadrilateral* (4), *pentagon* (5)…`,
     },
     {
       question: "What is the chemical symbol for water?",
-      answer_type: "text",
+      answer_type: "number",
       answer: "H2O",
       hint: `Water is made of **two** hydrogen atoms and **one** oxygen atom.
 
@@ -35,7 +46,7 @@ Compare with: *triangle* (3), *quadrilateral* (4), *pentagon* (5)…`,
     },
     {
       question: "Who wrote the play 'Romeo and Juliet'?",
-      answer_type: "text",
+      answer_type: "number",
       answer: "Shakespeare",
       hint: `This English playwright lived from **1564 to 1616**.
 
