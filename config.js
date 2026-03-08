@@ -3,6 +3,7 @@ const quizConfig = {
 
   questions: [
     {
+      intro: `Téléchargez le fichier CSV et importez-le dans un tableur.`,
       question: "Combien de colonnes y a-t-il dans le tableau ?",
       answer_type: "number",
       answer: "20",
@@ -14,6 +15,7 @@ mais ce n'est pas pratique de travailler dans le fichier comme ça: il vaut mieu
 
 Voici comment faire dans Google Sheets:
 ![Ouvrez le menu "Fichier", puis cliquez sur "Importer"](img/importer.png)
+
 Puis allez sur l'onglet "Importer" et déposez-y le fichier CSV:
 ![Screenshot du menu d'importation](img/importer2.png)
 Vous pouvez garder les options par défaut et cliquer sur "Importer les données".
@@ -21,13 +23,17 @@ Vous pouvez garder les options par défaut et cliquer sur "Importer les données
         `Vous pouvez compter les colonnes manuellement, mais il y a une manière plus efficace de le faire:
 
 En cliquant sur le "1" à gauche de la première ligne, vous sélectionnez toute la première ligne.
+
 En bas à droite s'affiche toujours un résumé des cases sélectionnées.
 Comme ici les cases contiennent du texte, les tableur affichent en général le nombre de cases non-vides.
-C'est le nombre de colonnes de notre tableau !
-![Screenshot illustrant l'explication ci-dessus](img/importer2.png)`,
+
+![Screenshot illustrant l'explication ci-dessus](img/nombre_colonnes.png)
+
+C'est le nombre de colonnes de notre tableau !`,
       ],
     },
     {
+      intro: "test",
       question: "How many sides does a hexagon have?",
       answer_type: "number",
       answer: "6",

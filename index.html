@@ -125,6 +125,12 @@
             <!-- ── Quiz Screen ─────────────────────────────── -->
             <div class="card-body" x-show="screen === 'quiz'" x-cloak>
                 <!-- Question -->
+
+                <p
+                    x-show="currentQuestion.intro"
+                    x-html="marked.parse(currentQuestion.intro)"
+                ></p>
+
                 <p
                     class="text-muted small mb-1 text-uppercase fw-semibold tracking-wide"
                 >
@@ -174,7 +180,10 @@
 
                 <!-- Hint toggles -->
                 <div class="mt-4" x-show="currentHints.length" x-cloak>
-                    <template x-for="(hint, hintIndex) in currentHints" :key="hintIndex">
+                    <template
+                        x-for="(hint, hintIndex) in currentHints"
+                        :key="hintIndex"
+                    >
                         <div class="mb-2">
                             <button
                                 type="button"
@@ -197,7 +206,10 @@
                                 x-cloak
                                 x-transition
                             >
-                                <div class="small" x-html="renderHint(hint)"></div>
+                                <div
+                                    class="small"
+                                    x-html="renderHint(hint)"
+                                ></div>
                             </div>
                         </div>
                     </template>
