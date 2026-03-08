@@ -172,29 +172,35 @@
                     </div>
                 </div>
 
-                <!-- Hint toggle -->
-                <div class="mt-4">
-                    <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                        @click="showHint = !showHint"
-                        :aria-expanded="showHint ? 'true' : 'false'"
-                        aria-controls="hint-content"
-                    >
-                        <span
-                            x-text="showHint ? '▲ Masquer l\'indice' : '💡 Afficher l\'indice'"
-                        ></span>
-                    </button>
+                <!-- Hint toggles -->
+                <div class="mt-4" x-show="currentHints.length" x-cloak>
+                    <template x-for="(hint, hintIndex) in currentHints" :key="hintIndex">
+                        <div class="mb-2">
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-secondary"
+                                @click="toggleHint(hintIndex)"
+                                :aria-expanded="showHints[hintIndex] ? 'true' : 'false'"
+                                :aria-controls="'hint-content-' + hintIndex"
+                            >
+                                <span
+                                    x-text="showHints[hintIndex]
+                                        ? (currentHints.length > 1 ? '▲ Masquer l\'indice #' + (hintIndex + 1) : '▲ Masquer l\'indice')
+                                        : (currentHints.length > 1 ? '💡 Afficher l\'indice #' + (hintIndex + 1) : '💡 Afficher l\'indice')"
+                                ></span>
+                            </button>
 
-                    <div
-                        id="hint-content"
-                        class="hint-box p-3 mt-2"
-                        x-show="showHint"
-                        x-cloak
-                        x-transition
-                    >
-                        <div class="small" x-html="renderedHint"></div>
-                    </div>
+                            <div
+                                class="hint-box p-3 mt-2"
+                                :id="'hint-content-' + hintIndex"
+                                x-show="showHints[hintIndex]"
+                                x-cloak
+                                x-transition
+                            >
+                                <div class="small" x-html="renderHint(hint)"></div>
+                            </div>
+                        </div>
+                    </template>
                 </div>
             </div>
 

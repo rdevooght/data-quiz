@@ -71,25 +71,30 @@ function quizApp() {
     personId: null,
     currentIndex: 0,
     answer: "",
-    showHint: false,
+    showHints: [],
     shaking: false,
     wrongAnswer: false,
     liveMessage: "",
 
     // ── Computed ────────────────────────────────
     get currentQuestion() {
-      return this.config.questions[this.currentIndex];
+      return this.config.questions[this.currentIndex] ?? null;
     },
 
     get progress() {
       return (this.currentIndex / this.config.questions.length) * 100;
     },
 
-    get renderedHint() {
-      return marked.parse(this.currentQuestion.hint || "");
+    get currentHints() {
+      if (!this.currentQuestion) return [];
+      const hints = this.currentQuestion.hints;
+      if (Array.isArray(hints)) return hints.filter((hint) => !!hint);
+      if (this.currentQuestion.hint) return [this.currentQuestion.hint];
+      return [];
     },
 
     get currentAnswerType() {
+      if (!this.currentQuestion) return "text";
       return this.currentQuestion.answer_type === "number" ? "number" : "text";
     },
 
@@ -114,6 +119,8 @@ function quizApp() {
         this.screen =
           saved.currentIndex >= this.config.questions.length ? "done" : "quiz";
       }
+
+      this.resetHintVisibility();
     },
 
     // ── Actions ─────────────────────────────────
@@ -159,8 +166,8 @@ function quizApp() {
 
         this.wrongAnswer = false;
         this.answer = "";
-        this.showHint = false;
         this.currentIndex++;
+        this.resetHintVisibility();
 
         if (this.currentIndex >= this.config.questions.length) {
           this.screen = "done";
@@ -196,9 +203,22 @@ function quizApp() {
       this.name = "";
       this.currentIndex = 0;
       this.answer = "";
-      this.showHint = false;
+      this.resetHintVisibility();
       this.wrongAnswer = false;
       this.liveMessage = "Quiz réinitialisé.";
+    },
+
+    toggleHint(index) {
+      if (index < 0 || index >= this.showHints.length) return;
+      this.showHints[index] = !this.showHints[index];
+    },
+
+    renderHint(hint) {
+      return marked.parse(hint || "");
+    },
+
+    resetHintVisibility() {
+      this.showHints = this.currentHints.map(() => false);
     },
 
     // ── Persistence ─────────────────────────────
