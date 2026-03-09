@@ -48,7 +48,7 @@
                             x-show="screen === 'quiz'"
                             x-cloak
                         >
-                            Bonjour, <span x-text="name"></span> !
+                            <span x-text="name"></span>
                         </small>
                     </div>
                     <button
@@ -136,7 +136,10 @@
                 >
                     Question <span x-text="currentIndex + 1"></span>
                 </p>
-                <h5 class="mb-4" x-text="currentQuestion.question"></h5>
+                <h5
+                    class="mb-4"
+                    x-html="marked.parse(currentQuestion.question)"
+                ></h5>
 
                 <!-- Answer input -->
                 <div class="mb-3" :class="{ shake: shaking }">
