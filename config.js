@@ -100,6 +100,9 @@ Il doit donc manquer certaines données. C'est habituel pour ce genre de dataset
       question: `Quel était le budget de la Belgique pour l'objectif "Santé" en 2020, exprimé en euros ?`,
       answer_type: "number",
       answer: "78418372",
+      error_hints: {
+        78: `78€ ? C'est un peu non ? Regardez la colonne "Multiplicateur d'unité"`,
+      },
       hints: [
         `Vous pouvez filtrer sur plusieurs colonnes en même temps.
 Appliquez un filtre sur "Zone de référence" pour ne garder que la Belgique, puis sur "Objectif socio-économique" pour ne garder que l'objectif "Santé", et enfin sur "TIME_PERIOD" pour ne garder que l'année 2020.
@@ -182,6 +185,11 @@ Il y a une quinzaine de cases à corriger. Vous pouvez le faire une par une, mai
       ],
     },
     {
+      intro: `Ca n'est pas très surprenant d'apprendre que c'est le pays le moins peuplé qui à le plus petit budget.
+Il serait plus intéressant de comparer les pays par rapport à leur budget *par habitant*.
+
+Cette donnée n'existe pas encore dans le tableau.
+Pour répondre à cette question, essayez de créer une nouvelle colonne contenant le budget (en USD PPA constant) par habitant.`,
       question: `Quel pays avait le plus petit budget "Santé" *par habitant* en 2020 ?`,
       answer_type: "text",
       answer: "Turquie",
