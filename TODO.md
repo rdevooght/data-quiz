@@ -1,0 +1,6 @@
+- utiliser l'élément summary/details pour les hints
+- faire un type de question à choix multiple
+- ajouter des messages personnalisés pour certaines erreurs
+- revoir le design
+- record all attempts
+- naviguer vers les questions précédentes.
