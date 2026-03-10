@@ -2,4 +2,5 @@
 - ajouter une outro et passage manuel à la question suivante
 - click gif to zoom
 - revoir le design
+- save question title to db
 - record all attempts
