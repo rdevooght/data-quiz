@@ -117,6 +117,34 @@ Il faut donc multiplier les valeurs par 1 million pour obtenir la réponse corre
       ],
     },
     {
+      intro: `Les données sont rarement parlantes prises isolément.
+Il est plus intéressant de comparer des valeurs entre elles.
+`,
+      question: `Est-ce que le Canada a augmenté son budget pour l'objectif "Environnement" entre 2016 et 2017 ?`,
+      answer_type: "choice",
+      choices: ["Oui", "Non", "Les données ne permettent pas de répondre"],
+      answer: "Les données ne permettent pas de répondre",
+      error_hints: {
+        Oui: `Regardez la colonne "Statut d'observation"`,
+      },
+      hints: [
+        `Regardez les colonnes "Statut d'observation", "Statut d'observation 2", etc.
+Elles sont vides la plupart du temps, mais parfois contiennent des valeurs comme "Valeur provisoire", "Définition différente", ou encore "Rupture de série".
+Ces annotations indiquent des limitations ou des problèmes avec les données.
+
+Pour la ligne correspondant au budget du Canada pour l'objectif "Environnement" en 2017, la colonne "Statut d'observation" indique "Rupture de série".
+C'est une expression utilisée pour indiquer que les valeurs ont été calculées d'une manière différente de la fois précédente, et qu'on ne peut donc pas faire de comparaison avec les valeurs précédentes.
+`,
+      ],
+      outro: `Un dataset est toujours une approximation de la réalité.
+Les bons datasets documentent leurs limitations et méthodes afin d'en permettre une meilleure interprétation.
+Même dans ce cas, il faut utile de parler directement avec la personne qui a produit les données pour éviter des interprétations erronées.
+
+Par simplicité, dans la suite, nous allons ignorer les colonnes "Statut d'observation",
+mais souvenez-vous qu'il ne s'agit que d'un exemple, les observations que vous allez faire ne correspondent pas nécessairement à la réalité.
+`,
+    },
+    {
       intro: `Une bonne pratique face à un nouveau tableau est de lire les valeurs extrêmes:
 cela donne une idée de la gamme des valeurs et peut aider à identifier des cas particuliers, voire des erreurs dans les données.
 
@@ -216,6 +244,31 @@ Quand vous aurez saisi la formule, Google Sheets vous proposera de la remplir au
 
 ![Gif illustrant les instructions ci-dessus](img/valeur_par_hab.gif)
 `,
+      ],
+    },
+    {
+      intro: `Explorons un peu plus les capacités des formules.
+
+Pour la question suivante, basez-vous sur la colonne "Valeur (monnaie nationale)"`,
+      question: `Quel a été le budget moyen de la Belgique pour l'objectif "Santé" entre 2015 et 2024 ?`,
+      answer_type: "number",
+      answer: 64240304.1,
+      error_hints: {
+        64: "N'oubliez pas de multiplier par 1 million pour obtenir le montant en euros.",
+      },
+      hints: [
+        `Il faut utiliser la fonction "AVERAGE" dans Google Sheets.
+Dans Excel et LibreOffice, les fonctions sont traduites, il faut donc utiliser "MOYENNE" si votre ordinateur est en français.
+
+La notation "Cellule_de_début:Cellule_de_fin" permet de spécifier une plage de cellules. Par exemple, "=AVERAGE(B2:B10)" calcule la moyenne des valeurs des cellules B2 à B10.
+`,
+        `Avant d'appliquer la formule, copier les valeurs dans une nouvelle feuille.
+
+puis écrivez dans une case en dessous des cellules copiées "=AVERAGE(".
+Google Sheets essaye en général de deviner la plage de cellules sur laquelle appliquer la formule.
+Si cela ne fonctionne pas, vous pouvez spécifier la plage manuellement en sélectionnant les cellules avec la souris, soit en écrivant directement la plage dans la notation "Cellule_de_début:Cellule_de_fin".
+
+![Gif illustrant la copie d'une plage de valeur dans un nouvel onglet suivi du calcul de la moyenne de ces valeurs](img/average.gif)`,
       ],
     },
   ],
