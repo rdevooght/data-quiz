@@ -71,7 +71,6 @@ function quizApp() {
     personId: null,
     currentIndex: 0,
     answer: "",
-    showHints: [],
     shaking: false,
     wrongAnswer: false,
     liveMessage: "",
@@ -120,7 +119,6 @@ function quizApp() {
           saved.currentIndex >= this.config.questions.length ? "done" : "quiz";
       }
 
-      this.resetHintVisibility();
     },
 
     // ── Actions ─────────────────────────────────
@@ -167,8 +165,6 @@ function quizApp() {
         this.wrongAnswer = false;
         this.answer = "";
         this.currentIndex++;
-        this.resetHintVisibility();
-
         if (this.currentIndex >= this.config.questions.length) {
           this.screen = "done";
           this.liveMessage = "Quiz terminé. Félicitations.";
@@ -203,22 +199,12 @@ function quizApp() {
       this.name = "";
       this.currentIndex = 0;
       this.answer = "";
-      this.resetHintVisibility();
       this.wrongAnswer = false;
       this.liveMessage = "Quiz réinitialisé.";
     },
 
-    toggleHint(index) {
-      if (index < 0 || index >= this.showHints.length) return;
-      this.showHints[index] = !this.showHints[index];
-    },
-
     renderHint(hint) {
       return marked.parse(hint || "");
-    },
-
-    resetHintVisibility() {
-      this.showHints = this.currentHints.map(() => false);
     },
 
     // ── Persistence ─────────────────────────────
