@@ -51,13 +51,6 @@ body {
     animation: shake 0.4s ease;
 }
 
-/* Hint box */
-.hint-box {
-    background: #f8f9ff;
-    border-left: 4px solid #667eea;
-    border-radius: 0 0.5rem 0.5rem 0;
-}
-
 /* <details> hint styling */
 details > summary::-webkit-details-marker {
     display: none;
@@ -71,19 +64,10 @@ details[open] > summary.btn::before {
     content: "▲ Masquer l'indice";
 }
 
-details[open] .hint-box {
-    animation: hint-reveal 0.5s ease;
-}
-
-@keyframes hint-reveal {
-    from {
-        opacity: 0;
-        transform: translateY(-2px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+details .hint-box {
+    background: #f8f9ff;
+    border-left: 4px solid #667eea;
+    border-radius: 0 0.5rem 0.5rem 0;
 }
 
 /* Progress bar */

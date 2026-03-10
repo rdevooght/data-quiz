@@ -118,7 +118,6 @@ function quizApp() {
         this.screen =
           saved.currentIndex >= this.config.questions.length ? "done" : "quiz";
       }
-
     },
 
     // ── Actions ─────────────────────────────────
