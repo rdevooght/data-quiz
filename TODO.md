@@ -4,3 +4,4 @@
 - revoir le design
 - save question title to db
 - record all attempts
+- add explanations for LibreOffice
