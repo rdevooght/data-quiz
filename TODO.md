@@ -1,3 +1,4 @@
 - faire un type de question à choix multiple
+- ajouter une outro et passage manuel à la question suivante
 - revoir le design
 - record all attempts
