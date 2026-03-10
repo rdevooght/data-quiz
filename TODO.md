@@ -1,4 +1,3 @@
 - faire un type de question à choix multiple
 - revoir le design
 - record all attempts
-- naviguer vers les questions précédentes.

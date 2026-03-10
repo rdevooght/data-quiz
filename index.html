@@ -87,6 +87,29 @@
                         ></div>
                     </div>
                 </div>
+
+                <!-- Navigation -->
+                <div
+                    x-show="screen === 'quiz'"
+                    class="d-flex justify-content-between align-items-center mt-3"
+                >
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-light"
+                        @click="goPrev()"
+                        :disabled="!canGoPrev"
+                    >
+                        ← Question précédente
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-light"
+                        @click="goNext()"
+                        :disabled="!canGoNext"
+                    >
+                        Question suivante →
+                    </button>
+                </div>
             </div>
 
             <!-- ── Name Screen ─────────────────────────────── -->
@@ -159,11 +182,13 @@
                             :aria-invalid="wrongAnswer ? 'true' : 'false'"
                             aria-describedby="answer-type-remark wrong-answer-feedback"
                             autocomplete="off"
+                            :disabled="isCurrentAnswered"
                         />
                         <button
                             type="button"
                             class="btn btn-primary px-4 fw-semibold"
                             @click="submitAnswer()"
+                            :disabled="isCurrentAnswered"
                         >
                             Valider
                         </button>
@@ -177,8 +202,7 @@
                         x-cloak
                         role="alert"
                         x-text="wrongAnswerMessage"
-                    >
-                    </div>
+                    ></div>
                 </div>
 
                 <!-- Hints (native <details>) -->

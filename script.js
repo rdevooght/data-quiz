@@ -72,6 +72,7 @@ function quizApp() {
     personId: null,
     currentIndex: 0,
     answer: "",
+    answers: [],
     shaking: false,
     wrongAnswer: false,
     wrongAnswerMessage: DEFAULT_WRONG_ANSWER_MESSAGE,
@@ -83,7 +84,9 @@ function quizApp() {
     },
 
     get progress() {
-      return (this.currentIndex / this.config.questions.length) * 100;
+      const total = this.config.questions.length || 1;
+      const answered = Math.min(this.answers.length, total);
+      return (answered / total) * 100;
     },
 
     get currentHints() {
@@ -105,6 +108,18 @@ function quizApp() {
         : "Entrez une réponse";
     },
 
+    get isCurrentAnswered() {
+      return this.answers[this.currentIndex] !== undefined;
+    },
+
+    get canGoPrev() {
+      return this.currentIndex > 0;
+    },
+
+    get canGoNext() {
+      return this.currentIndex < this.answers.length;
+    },
+
     // ── Lifecycle ───────────────────────────────
     init() {
       document.title = this.config.title;
@@ -116,10 +131,18 @@ function quizApp() {
       const saved = this.loadProgress();
       if (saved) {
         this.name = saved.name;
-        this.currentIndex = saved.currentIndex;
+        this.answers = Array.isArray(saved.answers) ? saved.answers : [];
+        this.currentIndex = Math.min(
+          saved.currentIndex,
+          this.answers.length,
+          this.config.questions.length,
+        );
         this.screen =
           saved.currentIndex >= this.config.questions.length ? "done" : "quiz";
       }
+
+      this.syncAnswerForCurrent();
+      this.$watch("currentIndex", () => this.syncAnswerForCurrent());
     },
 
     // ── Actions ─────────────────────────────────
@@ -133,10 +156,12 @@ function quizApp() {
       // Post name to backend (non-blocking)
       apiSetName(this.personId, this.name);
 
+      this.syncAnswerForCurrent();
       this.$nextTick(() => this.$refs.answerInput.focus());
     },
 
     submitAnswer() {
+      if (this.isCurrentAnswered) return;
       const rawAnswer = this.answer.trim();
       const isNumberAnswer = this.currentAnswerType === "number";
 
@@ -165,7 +190,8 @@ function quizApp() {
 
         this.wrongAnswer = false;
         this.wrongAnswerMessage = DEFAULT_WRONG_ANSWER_MESSAGE;
-        this.answer = "";
+        this.answers[this.currentIndex] = rawAnswer;
+        this.answer = rawAnswer;
         this.currentIndex++;
         if (this.currentIndex >= this.config.questions.length) {
           this.screen = "done";
@@ -175,6 +201,7 @@ function quizApp() {
         }
 
         this.saveProgress();
+        this.syncAnswerForCurrent();
         this.$nextTick(() => this.$refs.answerInput?.focus());
       } else {
         // Wrong answer: shake + clear input
@@ -204,9 +231,25 @@ function quizApp() {
       this.name = "";
       this.currentIndex = 0;
       this.answer = "";
+      this.answers = [];
       this.wrongAnswer = false;
       this.wrongAnswerMessage = DEFAULT_WRONG_ANSWER_MESSAGE;
       this.liveMessage = "Quiz réinitialisé.";
+    },
+
+    goPrev() {
+      if (!this.canGoPrev) return;
+      this.currentIndex--;
+      this.liveMessage = `Question ${this.currentIndex + 1} sur ${this.config.questions.length}.`;
+      this.saveProgress();
+    },
+
+    goNext() {
+      if (!this.canGoNext) return;
+      this.currentIndex++;
+      this.liveMessage = `Question ${this.currentIndex + 1} sur ${this.config.questions.length}.`;
+      this.saveProgress();
+      this.$nextTick(() => this.$refs.answerInput?.focus());
     },
 
     getErrorHintMessage(rawAnswer) {
@@ -242,11 +285,25 @@ function quizApp() {
       return marked.parse(hint || "");
     },
 
+    syncAnswerForCurrent() {
+      this.wrongAnswer = false;
+      this.wrongAnswerMessage = DEFAULT_WRONG_ANSWER_MESSAGE;
+      if (this.isCurrentAnswered) {
+        this.answer = this.answers[this.currentIndex] ?? "";
+      } else {
+        this.answer = "";
+      }
+    },
+
     // ── Persistence ─────────────────────────────
     saveProgress() {
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ name: this.name, currentIndex: this.currentIndex }),
+        JSON.stringify({
+          name: this.name,
+          currentIndex: this.currentIndex,
+          answers: this.answers,
+        }),
       );
     },
 
@@ -259,6 +316,7 @@ function quizApp() {
         if (typeof data.currentIndex !== "number" || data.currentIndex < 0) {
           return null;
         }
+        if (!Array.isArray(data.answers)) data.answers = [];
         return data;
       } catch {
         return null;
