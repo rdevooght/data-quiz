@@ -160,26 +160,24 @@ function quizApp() {
       this.$nextTick(() => this.$refs.answerInput.focus());
     },
 
+    valuesMatch(a, b, type) {
+      if (type === "number") {
+        return Math.round(Number(a)) === Math.round(Number(b));
+      }
+      return a.trim().toLowerCase() === b.trim().toLowerCase();
+    },
+
     submitAnswer() {
       if (this.isCurrentAnswered) return;
       const rawAnswer = this.answer.trim();
-      const isNumberAnswer = this.currentAnswerType === "number";
 
       if (!rawAnswer) return;
 
-      let isCorrect = false;
-      if (isNumberAnswer) {
-        const givenNumber = Number(rawAnswer);
-        const correctNumber = Number(this.currentQuestion.answer);
-        isCorrect =
-          !Number.isNaN(givenNumber) &&
-          !Number.isNaN(correctNumber) &&
-          givenNumber === correctNumber;
-      } else {
-        const givenText = rawAnswer.toLowerCase();
-        const correctText = this.currentQuestion.answer.trim().toLowerCase();
-        isCorrect = givenText === correctText;
-      }
+      let isCorrect = this.valuesMatch(
+        rawAnswer,
+        this.currentQuestion.answer,
+        this.currentAnswerType,
+      );
 
       if (isCorrect) {
         // Post correct answer to backend (non-blocking)
@@ -256,28 +254,11 @@ function quizApp() {
       const hints = this.currentQuestion?.error_hints;
       if (!hints || !rawAnswer) return "";
 
-      const trimmed = rawAnswer.trim();
-      if (!trimmed) return "";
-
-      const hasOwn = (key) =>
-        Object.prototype.hasOwnProperty.call(hints, key);
-
-      if (this.currentAnswerType === "number") {
-        if (hasOwn(trimmed)) return hints[trimmed];
-        const parsed = Number(trimmed);
-        if (!Number.isNaN(parsed)) {
-          const matchedKey = Object.keys(hints).find((key) => {
-            const keyNumber = Number(key);
-            return !Number.isNaN(keyNumber) && keyNumber === parsed;
-          });
-          if (matchedKey) return hints[matchedKey];
+      for (const val in hints) {
+        if (this.valuesMatch(rawAnswer, val, this.currentAnswerType)) {
+          return hints[val];
         }
-        return "";
       }
-
-      const normalized = trimmed.toLowerCase();
-      if (hasOwn(normalized)) return hints[normalized];
-      if (hasOwn(trimmed)) return hints[trimmed];
       return "";
     },
 
