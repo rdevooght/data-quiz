@@ -42,6 +42,9 @@ Par exemple, la colonne "Zone de référence" contient des noms de pays, et la c
       question: `Combien de pays sont listés dans le tableau ?`,
       answer_type: "number",
       answer: "36",
+      error_hints: {
+        37: "Vous avez peut-être compté le nom de la colonne dans le nombre de pays ?",
+      },
       hints: [
         `Pour trouver le nombre de valeurs différentes dans une colonne, le plus simple est d'utiliser la fonction de filtre.
 

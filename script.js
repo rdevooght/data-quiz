@@ -6,6 +6,7 @@ const STORAGE_KEY = "quizProgress";
 const UUID_KEY = "quizPersonId";
 const QUIZ_ID = 0;
 const API_BASE = "https://data-quizz.robin-de.workers.dev";
+const DEFAULT_WRONG_ANSWER_MESSAGE = "✗ Ce n'est pas ça — réessayez !";
 
 // ── API helpers (fire-and-forget, errors only logged) ──
 
@@ -73,6 +74,7 @@ function quizApp() {
     answer: "",
     shaking: false,
     wrongAnswer: false,
+    wrongAnswerMessage: DEFAULT_WRONG_ANSWER_MESSAGE,
     liveMessage: "",
 
     // ── Computed ────────────────────────────────
@@ -162,6 +164,7 @@ function quizApp() {
         );
 
         this.wrongAnswer = false;
+        this.wrongAnswerMessage = DEFAULT_WRONG_ANSWER_MESSAGE;
         this.answer = "";
         this.currentIndex++;
         if (this.currentIndex >= this.config.questions.length) {
@@ -176,6 +179,9 @@ function quizApp() {
       } else {
         // Wrong answer: shake + clear input
         this.wrongAnswer = true;
+        const customErrorHint = this.getErrorHintMessage(rawAnswer);
+        this.wrongAnswerMessage =
+          customErrorHint || DEFAULT_WRONG_ANSWER_MESSAGE;
         this.answer = "";
         this.liveMessage = "Réponse incorrecte. Réessayez.";
         this.triggerShake();
@@ -199,7 +205,37 @@ function quizApp() {
       this.currentIndex = 0;
       this.answer = "";
       this.wrongAnswer = false;
+      this.wrongAnswerMessage = DEFAULT_WRONG_ANSWER_MESSAGE;
       this.liveMessage = "Quiz réinitialisé.";
+    },
+
+    getErrorHintMessage(rawAnswer) {
+      const hints = this.currentQuestion?.error_hints;
+      if (!hints || !rawAnswer) return "";
+
+      const trimmed = rawAnswer.trim();
+      if (!trimmed) return "";
+
+      const hasOwn = (key) =>
+        Object.prototype.hasOwnProperty.call(hints, key);
+
+      if (this.currentAnswerType === "number") {
+        if (hasOwn(trimmed)) return hints[trimmed];
+        const parsed = Number(trimmed);
+        if (!Number.isNaN(parsed)) {
+          const matchedKey = Object.keys(hints).find((key) => {
+            const keyNumber = Number(key);
+            return !Number.isNaN(keyNumber) && keyNumber === parsed;
+          });
+          if (matchedKey) return hints[matchedKey];
+        }
+        return "";
+      }
+
+      const normalized = trimmed.toLowerCase();
+      if (hasOwn(normalized)) return hints[normalized];
+      if (hasOwn(trimmed)) return hints[trimmed];
+      return "";
     },
 
     renderHint(hint) {
