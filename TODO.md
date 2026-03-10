@@ -1,4 +1,5 @@
 - faire un type de question à choix multiple
 - ajouter une outro et passage manuel à la question suivante
+- click gif to zoom
 - revoir le design
 - record all attempts
