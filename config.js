@@ -10,22 +10,22 @@ const quizConfig = {
       hints: [
         `Le fichier est de type CSV (comma separated value),
         ce qui veut dire que le fichier contient du texte et que chaque colonne est séparée par une virgule.
-        Vous pouvez l'ouvrir dans un éditeur de texte comme bloc-note pour en voir le contenu,
-        mais ce n'est pas pratique de travailler dans le fichier comme ça: il vaut mieux l'importer dans un tableur (LibreOffice, Google Sheets, Excel, ...).
+        Vous pouvez l'ouvrir dans un éditeur de texte comme le bloc-notes pour en voir le contenu,
+        mais ce n'est pas pratique de travailler dans le fichier comme ça : il vaut mieux l'importer dans un tableur (LibreOffice, Google Sheets, Excel, ...).
 
-        Voici comment faire dans Google Sheets:
+        Voici comment faire dans Google Sheets :
         ![Ouvrez le menu "Fichier", puis cliquez sur "Importer"](img/importer.png)
 
-        Puis allez sur l'onglet "Importer" et déposez-y le fichier CSV:
+        Puis allez sur l'onglet "Importer" et déposez-y le fichier CSV :
         ![Screenshot du menu d'importation](img/importer2.png)
         Vous pouvez garder les options par défaut et cliquer sur "Importer les données".
         `,
-        `Vous pouvez compter les colonnes manuellement, mais il y a une manière plus efficace de le faire:
+        `Vous pouvez compter les colonnes manuellement, mais il y a une manière plus efficace de le faire :
 
         En cliquant sur le "1" à gauche de la première ligne, vous sélectionnez toute la première ligne.
 
         En bas à droite s'affiche toujours un résumé des cases sélectionnées.
-        Comme ici les cases contiennent du texte, les tableur affichent en général le nombre de cases non-vides.
+        Comme ici les cases contiennent du texte, les tableurs affichent en général le nombre de cases non vides.
 
         ![Screenshot illustrant l'explication ci-dessus](img/nombre_colonnes.png)
 
@@ -35,7 +35,7 @@ const quizConfig = {
     {
       intro: `Maintenant que le tableau est importé, explorons un peu son contenu.
 
-        Les colonnes ont des noms dans des formats variés et pas toujours explicite, mais en regardant les premières lignes vous devriez en comprendre le sens.
+        Les colonnes ont des noms dans des formats variés et pas toujours explicites, mais en regardant les premières lignes vous devriez en comprendre le sens.
 
         Par exemple, la colonne "Zone de référence" contient des noms de pays, et la colonne "REF_AREA" contient l'abréviation internationale du pays (code ISO 3166-1).
         `,
@@ -48,13 +48,13 @@ const quizConfig = {
       hints: [
         `Pour trouver le nombre de valeurs différentes dans une colonne, le plus simple est d'utiliser la fonction de filtre.
 
-        Pour activer les filtres, cliquez sur une case du tableau puis sur le symbole d'entonoir dans la barre d'outils:
+        Pour activer les filtres, cliquez sur une case du tableau puis sur le symbole d'entonnoir dans la barre d'outils :
 
         ![Screenshot illustrant l'explication ci-dessus](img/filtre.png)
 
-        Un symbole apparait dans la première case de chaque colonne.
-        Cliquez sur ce symbole dans la colonne que vous intéresse (Zone de référence ou REF_AREA).
-        Un menu apparait qui montre, entre autres, les valeurs uniques de cette colonne.
+        Un symbole apparaît dans la première case de chaque colonne.
+        Cliquez sur ce symbole dans la colonne qui vous intéresse (Zone de référence ou REF_AREA).
+        Un menu apparaît qui montre, entre autres, les valeurs uniques de cette colonne.
 
         ![Screenshot illustrant l'explication ci-dessus](img/nunique.png)
         `,
@@ -62,9 +62,9 @@ const quizConfig = {
     },
     {
       intro: `Continuons d'explorer le tableau.
-        La colonne "Objectif socio-économique" contient différentes catégories dans lesquelles sont classé les budgets R&D.
+        La colonne "Objectif socio-économique" contient différentes catégories dans lesquelles sont classés les budgets R&D.
         `,
-      question: `Combien d'objectifs différents existent-ils ?`,
+      question: `Combien d'objectifs différents existe-t-il ?`,
       answer_type: "number",
       answer: "14",
       error_hints: {
@@ -76,11 +76,11 @@ const quizConfig = {
 
         Corrigez l'erreur avant de passer à la question suivante.
 
-        *Un conseil*: Avant de modifier les données, il est utile de dupliquer la feuille pour conserver une copie des données d'origine.
+        *Un conseil* : avant de modifier les données, il est utile de dupliquer la feuille pour conserver une copie des données d'origine.
 
         ![Pour dupliquer une feuille, cliquez sur la flèche à droite du nom de la feuille (en bas de l'écran), puis cliquez sur "Dupliquer".](img/copy_tab.gif)`,
         `Il y a deux éléments très semblables dans la liste des valeurs différentes : "Énergie" et "energie".
-        Vraissemblablement, il s'agit de la même catégorie, mais le tableur va les considérer comme des valeurs distinctes, ce qui mènerait sans doute à des problèmes.
+        Vraisemblablement, il s'agit de la même catégorie, mais le tableur va les considérer comme des valeurs distinctes, ce qui mènerait sans doute à des problèmes.
 
         Toutes les autres catégories sont capitalisées, alors gardons "Énergie" comme valeur correcte.
         Utilisez la fonction de filtre sur la colonne "Objectif socio-économique" pour ne garder que la ligne contenant la valeur "energie", puis modifiez-la en "Énergie".
@@ -90,11 +90,11 @@ const quizConfig = {
       ],
     },
     {
-      intro: `Regardons maintenant les colonnes suivantes:
+      intro: `Regardons maintenant les colonnes suivantes :
         - "TIME_PERIOD" contient des années
         - "Valeur (monnaie nationale)" contient un montant exprimé dans la devise spécifiée par les colonnes "CURRENCY" et "Monnaie".
 
-        La structure des données est donc la suivante: chaque ligne correspond à un budget R&D pour un pays, un objectif socio-économique et une année donnée.
+        La structure des données est donc la suivante : chaque ligne correspond à un budget R&D pour un pays, un objectif socio-économique et une année donnée.
 
         Il y a 36 pays, 14 objectifs socio-économiques et 10 années dans le tableau.
         On devrait donc trouver 34x14x10 = 4760 lignes dans le tableau, mais il n'y en a que 4662.
@@ -104,7 +104,7 @@ const quizConfig = {
       answer_type: "number",
       answer: "78418372",
       error_hints: {
-        78: `78€ ? C'est un peu non ? Regardez la colonne "Multiplicateur d'unité"`,
+        78: `78 € ? C'est un peu peu, non ? Regardez la colonne "Multiplicateur d'unité"`,
       },
       hints: [
         `Vous pouvez filtrer sur plusieurs colonnes en même temps.
@@ -112,7 +112,7 @@ const quizConfig = {
 
         ![Screenshot illustrant l'explication ci-dessus](img/filtre2.png)
         `,
-        `Remarquez la colonne "Multiplicateur d'unité": elle indique que les valeurs sont exprimées en millions.
+        `Remarquez la colonne "Multiplicateur d'unité" : elle indique que les valeurs sont exprimées en millions.
         Il faut donc multiplier les valeurs par 1 million pour obtenir la réponse correcte.`,
       ],
     },
@@ -129,7 +129,7 @@ const quizConfig = {
       },
       hints: [
         `Regardez les colonnes "Statut d'observation", "Statut d'observation 2", etc.
-        Elles sont vides la plupart du temps, mais parfois contiennent des valeurs comme "Valeur provisoire", "Définition différente", ou encore "Rupture de série".
+        Elles sont vides la plupart du temps, mais contiennent parfois des valeurs comme "Valeur provisoire", "Définition différente", ou encore "Rupture de série".
         Ces annotations indiquent des limitations ou des problèmes avec les données.
 
         Pour la ligne correspondant au budget du Canada pour l'objectif "Environnement" en 2017, la colonne "Statut d'observation" indique "Rupture de série".
@@ -138,20 +138,20 @@ const quizConfig = {
       ],
       outro: `Un dataset est toujours une approximation de la réalité.
         Les bons datasets documentent leurs limitations et méthodes afin d'en permettre une meilleure interprétation.
-        Même dans ce cas, il faut utile de parler directement avec la personne qui a produit les données pour éviter des interprétations erronées.
+        Même dans ce cas, il est utile de parler directement avec la personne qui a produit les données pour éviter des interprétations erronées.
 
         Par simplicité, dans la suite, nous allons ignorer les colonnes "Statut d'observation",
-        mais souvenez-vous qu'il ne s'agit que d'un exemple, les observations que vous allez faire ne correspondent pas nécessairement à la réalité.
+        mais souvenez-vous qu'il ne s'agit que d'un exemple : les observations que vous allez faire ne correspondent pas nécessairement à la réalité.
         `,
     },
     {
-      intro: `Une bonne pratique face à un nouveau tableau est de lire les valeurs extrêmes:
+      intro: `Une bonne pratique face à un nouveau tableau est de lire les valeurs extrêmes :
         cela donne une idée de la gamme des valeurs et peut aider à identifier des cas particuliers, voire des erreurs dans les données.
 
-        Remarquez qu'il y a 3 colonnes de "Valeur":
-        - **Valeur (monnaie nationale)**: le montant dans la monnaie du pays
-        - **Valeur (USD PPA courant)**: les dollars en parité de pouvoir d’achat (USD PPA) sont une unité qui ajuste les montants d’argent entre pays pour tenir compte des différences de prix. C'est utile pour comparer les budgets de différents pays entre eux.
-        - **Valeur (USD PPA constant)**: les dollars PPA constant sont ajustés pour tenir compte de l'inflation, et permettent ainsi de comparer les budgets à travers les années.`,
+        Remarquez qu'il y a 3 colonnes de "Valeur" :
+        - **Valeur (monnaie nationale)** : le montant dans la monnaie du pays
+        - **Valeur (USD PPA courant)** : les dollars en parité de pouvoir d'achat (USD PPA) sont une unité qui ajuste les montants d'argent entre pays pour tenir compte des différences de prix. C'est utile pour comparer les budgets de différents pays entre eux.
+        - **Valeur (USD PPA constant)** : les dollars PPA constants sont ajustés pour tenir compte de l'inflation, et permettent ainsi de comparer les budgets à travers les années.`,
       question:
         "Quel pays avait le plus petit budget pour l'objectif 'Santé' en 2020 ?",
       answer_type: "text",
@@ -161,42 +161,42 @@ const quizConfig = {
         estonie: `L'Estonie a bien la plus petite valeur exprimée en monnaie nationale, mais pour comparer les pays entre eux, il faut utiliser la valeur en USD PPA.`,
       },
       hints: [
-        `Commencez par filtrer les colonnes "Objectif socio-économique" et "TIME_PERIOD" pour ne garder que les budget de Santé de 2020.
+        `Commencez par filtrer les colonnes "Objectif socio-économique" et "TIME_PERIOD" pour ne garder que les budgets de Santé de 2020.
 
         Ensuite, utilisez la fonction de tri pour ordonner les valeurs du plus petit au plus grand.
-        Le tri se fait en cliquant sur la même icone que pour le filtre, puis en sélectionnant "Trier de A à Z".
+        Le tri se fait en cliquant sur la même icône que pour le filtre, puis en sélectionnant "Trier de A à Z".
 
         ![Menu de tri dans Google Sheets](img/sort.png)
 
         Quand vous triez une colonne d'un tableau, les autres colonnes sont également triées dans le même ordre, pour que les valeurs de chaque ligne restent liées.`,
-        `Si le tri ne semble pas avoir fonctionné correctement, c'est sans doute que les valeurs de la colonne sont interprétées comme du texte plutôt que des nombres.
+        `Si le tri ne semble pas avoir fonctionné correctement, c'est sans doute que les valeurs de la colonne sont interprétées comme du texte plutôt que comme des nombres.
 
         Le dataset original utilise un point (.) comme séparateur décimal, mais Google Sheets utilise des virgules (si votre ordinateur est en français).
         Il faut donc remplacer les points par des virgules pour que les valeurs soient traitées comme des nombres et pas comme du texte.
 
-        Pour cela on peut utiliser la fonction "Remplacer" que l'on trouve en appuyant sur les touches CTRL+h, ou en cherchant "remplacer" dans la barre de recherche du menu:
+        Pour cela on peut utiliser la fonction "Remplacer" que l'on trouve en appuyant sur les touches CTRL+H, ou en cherchant "remplacer" dans la barre de recherche du menu :
 
         ![Screenshot de la barre de recherche du menu](img/menu_search.png)
 
-        Dans le menu qui apparait, entrez '.' dans le champ "Rechercher" et ',' dans le champ "Remplacer par". Cliquez ensuite sur "Remplacer tout".
+        Dans le menu qui apparaît, entrez '.' dans le champ "Rechercher" et ',' dans le champ "Remplacer par". Cliquez ensuite sur "Remplacer tout".
 
         ![Screenshot de la fonction Remplacer](img/replace.png)
 
-        Si vous sélectionnez une plage de cellules avant d'ouvrir le menu de remplacement, seul les cellules sélectionnées seront modifiées.
-        Ce n'est pas nécessaire dans notre cas, car dans ce dataset les point n'apparaissent que comme séparateur décimal, il faut donc tous les remplacer.
+        Si vous sélectionnez une plage de cellules avant d'ouvrir le menu de remplacement, seules les cellules sélectionnées seront modifiées.
+        Ce n'est pas nécessaire dans notre cas, car dans ce dataset les points n'apparaissent que comme séparateur décimal, il faut donc tous les remplacer.
                 `,
       ],
     },
     {
       intro: `L'Islande avait donc le plus petit budget pour l'objectif 'Santé' en 2020.
-        Mais c'est un petit pays, ce n'est donc pas étonnant que sont budget soit faible.
+        Mais c'est un petit pays, ce n'est donc pas étonnant que son budget soit faible.
 
-        Interessons-nous à la colonne "population" pour voir si cela peut expliquer la place de l'Islande dans le classement.`,
+        Intéressons-nous à la colonne "population" pour voir si cela peut expliquer la place de l'Islande dans le classement.`,
       question: "Quel pays avait la plus petite population en 2020 ?",
       answer_type: "text",
       answer: "islande",
       error_hints: {
-        "pays-bas": `Les Pays-Bas n'aurait une population que de 174 415 personnes ? Je crois qu'il y a une erreur dans les données ! Regardez l'indice #1`,
+        "pays-bas": `Les Pays-Bas n'auraient une population que de 174 415 personnes ? Je crois qu'il y a une erreur dans les données ! Regardez l'indice #1`,
       },
       hints: [
         `Si l'on trie les pays par population du plus petit au plus grand, ce sont les Pays-Bas qui arrivent en premier avec 174 415 personnes.
@@ -207,8 +207,8 @@ const quizConfig = {
         On a une erreur d'un facteur 100. Heureusement, cette erreur ne semble concerner que les Pays-Bas en 2020.
 
         Il y a une quinzaine de cases à corriger. Vous pouvez le faire une par une, mais il y a une manière plus rapide :
-        1. commencez par filtrer les données pour ne garder que les lignes à corriger: Pays-Bas en 2020 (mais tous les objectifs socio-économiques).
-        2. corrigez la valeur de la première ligne: remplacez 174 415 par 17 441 500.
+        1. commencez par filtrer les données pour ne garder que les lignes à corriger : Pays-Bas en 2020 (mais tous les objectifs socio-économiques).
+        2. corrigez la valeur de la première ligne : remplacez 174 415 par 17 441 500.
         3. cliquez sur le coin inférieur droit de la cellule et faites glisser pour sélectionner toutes les lignes à corriger, cela va copier la valeur de la première ligne dans toutes les autres.
 
         ![Gif illustrant les étapes 2 et 3 de la correction](img/copy_cell_value.gif)
@@ -216,7 +216,7 @@ const quizConfig = {
       ],
     },
     {
-      intro: `Ca n'est pas très surprenant d'apprendre que c'est le pays le moins peuplé qui à le plus petit budget.
+      intro: `Ce n'est pas très surprenant d'apprendre que c'est le pays le moins peuplé qui a le plus petit budget.
         Il serait plus intéressant de comparer les pays par rapport à leur budget *par habitant*.
 
         Cette donnée n'existe pas encore dans le tableau.
@@ -230,7 +230,7 @@ const quizConfig = {
       hints: [
         `Créez une nouvelle colonne pour y calculer le budget par habitant.
         Pour insérer une colonne après la colonne "Valeur (USD PPA constant)", faites un clic droit sur la colonne et choisissez "Insérer une colonne à droite".
-        Donnez lui un nom explicite, par exemple "Valeur/hab (USD PPA constant)".
+        Donnez-lui un nom explicite, par exemple "Valeur/hab (USD PPA constant)".
 
         Ensuite, il faut remplir cette colonne à l'aide d'une formule.
         Assurez-vous qu'il n'y a aucun filtre actif, puis allez dans la première cellule de la colonne pour taper la formule.
@@ -261,7 +261,7 @@ const quizConfig = {
 
     Sélectionnez toutes les cellules de la colonne "Valeur (monnaie nationale)".
     En bas à droite, vous devriez voir la somme des valeurs sélectionnées.
-    vous pouvez cliquez sur cette information pour afficher d'autres statistiques, par exemple la moyenne ou la valeur maximale.
+    Vous pouvez cliquer sur cette information pour afficher d'autres statistiques, par exemple la moyenne ou la valeur maximale.
 
     ![Gif illustrant les étapes ci-dessus](img/total_value.gif)`,
       ],
@@ -271,7 +271,7 @@ const quizConfig = {
     Pour ce genre d'opération, les tableurs offrent un outil très puissant : les **tableaux croisés dynamiques** (ou *pivot tables* en anglais).
 
     Les tableaux croisés dynamiques permettent de résumer un grand tableau en regroupant les lignes en fonction des valeurs d'une ou plusieurs colonnes (par exemple les pays, l'année, l'objectif),
-    et en agrégant pour chaque groupe les valeurs d'une autre colonne (par exemple en calculant la somme ou la moyenne des budget, de la population, etc.).`,
+    et en agrégeant pour chaque groupe les valeurs d'une autre colonne (par exemple en calculant la somme ou la moyenne des budgets, de la population, etc.).`,
 
       question: `Quel pays avait le budget R&D total **par habitant** le plus élevé en 2024 ?`,
 
@@ -282,22 +282,22 @@ const quizConfig = {
           "On s'intéresse ici au budget par habitant, pas au budget total.",
         USA: "On s'intéresse ici au budget par habitant, pas au budget total.",
         Japon:
-          "On s'intéresse ici au budget par habitant, pas au budget total, et surement pas en devise locale.",
+          "On s'intéresse ici au budget par habitant, pas au budget total, et sûrement pas en devise locale.",
       },
       hints: [
         `Pour créer un tableau croisé dynamique dans Google Sheets, cliquez sur une cellule du tableau, puis allez dans le menu **Insertion > Tableau croisé dynamique**.
     Google Sheets vous proposera de l'insérer dans une nouvelle feuille — acceptez.
 
     Dans le panneau qui apparaît à droite, configurez le tableau ainsi :
-    - Dans **Lignes**, ajoutez "Zone de référence": un veut grouper les données par pays.
-    - Dans **Valeurs**, ajoutez "Valeur/hab (USD PPA constant)", en choisissant **SOMME** comme fonction de synthèse: on veut calculer la somme des budgets par habitant.
+    - Dans **Lignes**, ajoutez "Zone de référence" : on veut grouper les données par pays.
+    - Dans **Valeurs**, ajoutez "Valeur/hab (USD PPA constant)", en choisissant **SOMME** comme fonction de synthèse : on veut calculer la somme des budgets par habitant.
     - Dans **Filtres**, ajoutez "TIME_PERIOD" et ne gardez que la valeur 2024.
 
     ![Gif illustrant la création du tableau croisé dynamique](img/pivot_table.gif)`,
         `Pour trouver facilement le pays avec le budget par habitant le plus élevé, il faut trier le tableau.
 
     Pour trier le tableau croisé dynamique, retrouvez l'élément "Zone de référence" dans la zone "Lignes" du panneau de configuration,
-    et changer l'option "Trier par".
+    et changez l'option "Trier par".
 
     ![Gif illustrant le tri du tableau croisé dynamique](img/sort_pivot_table.gif)`,
       ],
@@ -318,7 +318,7 @@ Pour cette question, essayez de créer un tableau qui contient une ligne par pay
 
 ![Gif illustrant la création du tableau croisé dynamique](img/2dim_pivot_table.gif)
 
-Reste encore à comparer les valeurs pour chaque pays en 2022 et en 2015.
+Il reste encore à comparer les valeurs pour chaque pays en 2022 et en 2015.
 Ici, le plus efficace est d'utiliser une formule, suivie d'une mise en forme conditionnelle.
 Ouvrez le prochain indice pour en savoir plus.`,
         `Créez une colonne à côté du tableau croisé dynamique dans laquelle vous calculez la différence entre les budgets par habitant en 2022 et en 2015 pour chaque pays.
@@ -327,19 +327,19 @@ Ouvrez le prochain indice pour en savoir plus.`,
 
 Il faut maintenant compter le nombre de valeurs négatives dans cette colonne.
 
-Vous pouvez le faire manuellement, mais c'est l'occasion de découvrir une autre fonctionnalité des tableurs: la mise en forme conditionnelle.
+Vous pouvez le faire manuellement, mais c'est l'occasion de découvrir une autre fonctionnalité des tableurs : la mise en forme conditionnelle.
 Dans Google Sheets, sélectionnez la colonne avec les différences et allez dans le menu **Format > Mise en forme conditionnelle**.
 
 ![Gif illustrant la mise en forme conditionnelle](img/mise_en_forme_condi.gif)`,
       ],
     },
     {
-      intro: `Jusqu'à présent, on a comparé les investissements des pays en comparant directement les montants ou les montants par habitants,
-mais il est aussi intéressant d'analyser quel part du budget R&D total est dirigé vers tel ou tel secteur.
+      intro: `Jusqu'à présent, on a comparé les investissements des pays en comparant directement les montants ou les montants par habitant,
+mais il est aussi intéressant d'analyser quelle part du budget R&D total est dirigée vers tel ou tel secteur.
 Cela donne une idée des priorités de R&D pour chaque pays.
 
-Par exemple, en 2024, près de 33% du budget R&D de la Belgique est consacré à l'objectif "Production et technologie industrielles",
-mais seulement 0,7% était consacré à l'objectif "Environnement".`,
+Par exemple, en 2024, près de 33 % du budget R&D de la Belgique est consacré à l'objectif "Production et technologie industrielles",
+mais seulement 0,7 % était consacré à l'objectif "Environnement".`,
 
       question: `Quel est le pays qui, en 2024, a consacré la plus grande part de son budget R&D à l'objectif "Environnement" ?`,
 
@@ -347,10 +347,10 @@ mais seulement 0,7% était consacré à l'objectif "Environnement".`,
       answer: "Finlande",
       error_hints: {
         Lettonie: "N'oubliez pas de filtrer sur l'année 2024",
-        Japon: `Le Japon est le pays qui a consacré le plus grand budget à l'objectif "Environnment", mais pas celui qui y a consacré la plus grande *part* de son budget.`,
+        Japon: `Le Japon est le pays qui a consacré le plus grand budget à l'objectif "Environnement", mais pas celui qui y a consacré la plus grande *part* de son budget.`,
       },
       hints: [
-        `Créez un tableau croisé dynamique avec les propriétés suivantes:
+        `Créez un tableau croisé dynamique avec les propriétés suivantes :
 - **Zone de référence** dans la zone **Lignes**
 - **Objectifs socio-économiques** dans la zone **Colonnes**
 - **Valeur (USD PPA constant)** dans la zone **Valeurs** (vous aurez le même résultat avec les autres colonnes de valeur... pourquoi ?)
@@ -358,17 +358,17 @@ mais seulement 0,7% était consacré à l'objectif "Environnement".`,
 
 Par défaut, le tableau montre directement les valeurs, mais ce qui vous intéresse c'est le pourcentage que cette valeur représente du budget total du pays.
 Il est possible de configurer le tableau pour afficher cela, mais comment ?`,
-        `Dans la zone Valeur, modifiez l'option "Afficher en tant que" pour choisir "Pourcentage du total du lignes"
-(ou "Pourcentage du total du colonnes" si vous avez mis les pays en colonnes et les objectifs en lignes).
+        `Dans la zone Valeur, modifiez l'option "Afficher en tant que" pour choisir "Pourcentage du total d'une ligne"
+(ou "Pourcentage du total d'une colonne" si vous avez mis les pays en colonnes et les objectifs en lignes).
 
-![Gif illustrant le choix de l'option "Pourcentage du total du lignes"](img/pivot_perc.gif)
+![Gif illustrant le choix de l'option "Pourcentage du total d'une ligne"](img/pivot_perc.gif)
 
-Maintenant, chaque ligne somme à 100% du budget, et chaque case donne le pourcentage du budget total du pays pour cet objectif.
+Maintenant, chaque ligne somme à 100 % du budget, et chaque case donne le pourcentage du budget total du pays pour cet objectif.
 
-Reste à trouvez quel pays à le pourcentage le plus élevé pour l'objectif "Environnement".
+Il reste à trouver quel pays a le pourcentage le plus élevé pour l'objectif "Environnement".
 Là encore, la mise en forme conditionnelle peut aider.`,
         `Sélectionnez la colonne "Environnement" et appliquez une mise en forme conditionnelle.
-Le menu mise en forme conditionnelle s'ouvre par défaut sur l'onglet "couleur unie.
+Le menu de mise en forme conditionnelle s'ouvre par défaut sur l'onglet "Couleur unie".
 Cliquez à la place sur l'onglet "Dégradé de couleur", gardez les options par défaut et cliquez sur OK.
 
 Les cases de cette colonne sont maintenant colorées d'un vert d'autant plus intense que la valeur de la case est élevée.
