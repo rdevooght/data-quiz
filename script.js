@@ -23,7 +23,13 @@ async function apiSetName(personId, name) {
   }
 }
 
-async function apiAddAnswer(personId, questionId) {
+async function apiAddAnswer(
+  personId,
+  questionId,
+  questionText,
+  answerValue,
+  isCorrect,
+) {
   try {
     const res = await fetch(`${API_BASE}/add`, {
       method: "POST",
@@ -32,6 +38,9 @@ async function apiAddAnswer(personId, questionId) {
         quiz_id: QUIZ_ID,
         person_id: personId,
         question_id: questionId,
+        question_text: questionText,
+        answer: answerValue,
+        is_correct: isCorrect,
       }),
     });
     if (!res.ok) console.error("[quiz] /add error", await res.text());
@@ -189,12 +198,16 @@ function quizApp() {
         this.currentAnswerType,
       );
 
+      // Post answer to backend (non-blocking)
+      apiAddAnswer(
+        this.personId,
+        this.currentQuestion.id ?? this.currentIndex,
+        this.currentQuestion.question ?? "",
+        rawAnswer,
+        isCorrect,
+      );
+
       if (isCorrect) {
-        // Post correct answer to backend (non-blocking)
-        apiAddAnswer(
-          this.personId,
-          this.currentQuestion.id ?? this.currentIndex,
-        );
 
         this.wrongAnswer = false;
         this.wrongAnswerMessage = DEFAULT_WRONG_ANSWER_MESSAGE;
