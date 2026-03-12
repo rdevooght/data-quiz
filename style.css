@@ -3,29 +3,36 @@
 }
 
 body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
-    align-items: center;
     justify-content: center;
+    padding: 1rem;
 }
 
 .quiz-card {
     width: 100%;
     max-width: 780px;
     border-radius: 1rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .quiz-title {
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
-    border-radius: 1rem 1rem 0 0;
-    padding: 1.5rem 2rem 1rem;
+    border-radius: 1rem;
+    padding: 1rem;
 }
 
 .card-body {
-    padding: 2rem;
+    padding: 1rem;
+}
+
+@media (min-width: 500px) {
+    .quiz-title {
+        padding: 2rem;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
 }
 
 /* Shake animation for wrong answers */
@@ -66,8 +73,7 @@ details[open] > summary.btn::before {
 
 details .hint-box {
     background: #f8f9ff;
-    border-left: 4px solid #667eea;
-    border-radius: 0 0.5rem 0.5rem 0;
+    border-radius: 0.5rem 0.5rem;
 }
 details .hint-box img {
     cursor: zoom-in;
@@ -121,7 +127,7 @@ img {
 }
 
 .image-modal__img {
-    max-width: 95vw;
+    max-width: 97vw;
     max-height: 90vh;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     border-radius: 0.5rem;
