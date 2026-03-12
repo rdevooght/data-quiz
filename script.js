@@ -99,13 +99,23 @@ function quizApp() {
 
     get currentAnswerType() {
       if (!this.currentQuestion) return "text";
-      return this.currentQuestion.answer_type === "number" ? "number" : "text";
+      if (this.currentQuestion.answer_type === "number") return "number";
+      if (this.currentQuestion.answer_type === "choice") return "choice";
+      return "text";
     },
 
     get answerTypeRemark() {
       return this.currentAnswerType === "number"
         ? "Entrez un nombre"
         : "Entrez une réponse";
+    },
+
+    get currentChoices() {
+      if (!this.currentQuestion) return [];
+      if (this.currentAnswerType !== "choice") return [];
+      return Array.isArray(this.currentQuestion.choices)
+        ? this.currentQuestion.choices
+        : [];
     },
 
     get isCurrentAnswered() {
@@ -157,7 +167,7 @@ function quizApp() {
       apiSetName(this.personId, this.name);
 
       this.syncAnswerForCurrent();
-      this.$nextTick(() => this.$refs.answerInput.focus());
+      this.focusCurrentInput();
     },
 
     valuesMatch(a, b, type) {
@@ -169,7 +179,7 @@ function quizApp() {
 
     submitAnswer() {
       if (this.isCurrentAnswered) return;
-      const rawAnswer = this.answer.trim();
+      const rawAnswer = String(this.answer ?? "").trim();
 
       if (!rawAnswer) return;
 
@@ -200,7 +210,7 @@ function quizApp() {
 
         this.saveProgress();
         this.syncAnswerForCurrent();
-        this.$nextTick(() => this.$refs.answerInput?.focus());
+        this.focusCurrentInput();
       } else {
         // Wrong answer: shake + clear input
         this.wrongAnswer = true;
@@ -210,7 +220,7 @@ function quizApp() {
         this.answer = "";
         this.liveMessage = "Réponse incorrecte. Réessayez.";
         this.triggerShake();
-        this.$nextTick(() => this.$refs.answerInput.focus());
+        this.focusCurrentInput();
       }
     },
 
@@ -247,7 +257,7 @@ function quizApp() {
       this.currentIndex++;
       this.liveMessage = `Question ${this.currentIndex + 1} sur ${this.config.questions.length}.`;
       this.saveProgress();
-      this.$nextTick(() => this.$refs.answerInput?.focus());
+      this.focusCurrentInput();
     },
 
     getErrorHintMessage(rawAnswer) {
@@ -274,6 +284,18 @@ function quizApp() {
       } else {
         this.answer = "";
       }
+    },
+
+    focusCurrentInput() {
+      this.$nextTick(() => {
+        if (this.currentAnswerType === "choice") {
+          const firstChoice =
+            this.$refs.choiceGroup?.querySelector("input");
+          firstChoice?.focus();
+          return;
+        }
+        this.$refs.answerInput?.focus();
+      });
     },
 
     // ── Persistence ─────────────────────────────

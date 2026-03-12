@@ -169,26 +169,68 @@
                     <label class="form-label fw-semibold" for="answer-input"
                         >Votre réponse</label
                     >
-                    <div class="input-group">
-                        <input
-                            id="answer-input"
-                            class="form-control answer-input"
-                            :type="currentAnswerType"
-                            :placeholder="answerTypeRemark"
-                            x-model="answer"
-                            @keydown.enter="submitAnswer()"
-                            x-ref="answerInput"
-                            :inputmode="currentAnswerType === 'number' ? 'numeric' : 'text'"
+                    <div x-show="currentAnswerType !== 'choice'">
+                        <div class="input-group">
+                            <input
+                                id="answer-input"
+                                class="form-control answer-input"
+                                :type="currentAnswerType"
+                                :placeholder="answerTypeRemark"
+                                x-model="answer"
+                                @keydown.enter="submitAnswer()"
+                                x-ref="answerInput"
+                                :inputmode="currentAnswerType === 'number' ? 'numeric' : 'text'"
+                                :aria-invalid="wrongAnswer ? 'true' : 'false'"
+                                aria-describedby="answer-type-remark wrong-answer-feedback"
+                                autocomplete="off"
+                                :disabled="isCurrentAnswered"
+                            />
+                            <button
+                                type="button"
+                                class="btn btn-primary px-4 fw-semibold"
+                                @click="submitAnswer()"
+                                :disabled="isCurrentAnswered"
+                            >
+                                Valider
+                            </button>
+                        </div>
+                    </div>
+
+                    <div x-show="currentAnswerType === 'choice'" x-cloak>
+                        <div
+                            class="border rounded-3 p-3 bg-white bg-opacity-10"
+                            role="radiogroup"
                             :aria-invalid="wrongAnswer ? 'true' : 'false'"
-                            aria-describedby="answer-type-remark wrong-answer-feedback"
-                            autocomplete="off"
-                            :disabled="isCurrentAnswered"
-                        />
+                            aria-describedby="wrong-answer-feedback"
+                            x-ref="choiceGroup"
+                        >
+                            <template
+                                x-for="(choice, choiceIndex) in currentChoices"
+                                :key="choiceIndex"
+                            >
+                                <div class="form-check mb-2">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="choice-answer"
+                                        :id="'choice-' + choiceIndex"
+                                        :value="choice"
+                                        x-model="answer"
+                                        :disabled="isCurrentAnswered"
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        :for="'choice-' + choiceIndex"
+                                        x-text="choice"
+                                    ></label>
+                                </div>
+                            </template>
+                        </div>
                         <button
                             type="button"
-                            class="btn btn-primary px-4 fw-semibold"
+                            class="btn btn-primary px-4 fw-semibold mt-3 w-100"
                             @click="submitAnswer()"
-                            :disabled="isCurrentAnswered"
+                            :disabled="isCurrentAnswered || !answer"
                         >
                             Valider
                         </button>
