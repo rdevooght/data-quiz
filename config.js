@@ -102,7 +102,7 @@ Votre premier objectif est d'ouvrir le fichier dans un tableur (LibreOffice, Goo
 
         La structure des données est donc la suivante : chaque ligne correspond à un budget R&D pour un pays, un objectif socio-économique et une année donnée.
 
-        Il y a 36 pays, 14 objectifs socio-économiques et 10 années dans le tableau.
+        Il y a 34 pays, 14 objectifs socio-économiques et 10 années dans le tableau.
         On devrait donc trouver 34x14x10 = 4760 lignes dans le tableau, mais il n'y en a que 4662.
         Il doit donc manquer certaines données. C'est habituel pour ce genre de dataset, mais il faut être vigilant lors de l'analyse.
         `,
@@ -123,7 +123,7 @@ Votre premier objectif est d'ouvrir le fichier dans un tableur (LibreOffice, Goo
       ],
     },
     {
-      intro: `Les données sont rarement parlantes prises isolément.
+      intro: `Les données prises isolément sont rarement parlantes.
         Il est plus intéressant de comparer des valeurs entre elles.
         `,
       question: `Est-ce que le Canada a augmenté son budget pour l'objectif "Environnement" entre 2016 et 2017 ?`,
@@ -258,8 +258,8 @@ Votre premier objectif est d'ouvrir le fichier dans un tableur (LibreOffice, Goo
       answer_type: "number",
       answer: 3952667520,
       error_hints: {
-        3952: "N'oubliez pas de multiplier par 1 million pour obtenir le montant en euros.",
-        3953: "N'oubliez pas de multiplier par 1 million pour obtenir le montant en euros.",
+        3952: "N'oubliez pas de multiplier par 1 000 000 pour obtenir le montant en euros.",
+        3953: "N'oubliez pas de multiplier par 1 000 000 pour obtenir le montant en euros.",
       },
       hints: [
         `Regardez ce qui s'affiche en bas à droite de la feuille quand vous sélectionnez un groupe de cellules.`,
@@ -347,7 +347,7 @@ Cela donne une idée des priorités de R&D pour chaque pays.
 Par exemple, en 2024, près de 33 % du budget R&D de la Belgique est consacré à l'objectif "Production et technologie industrielles",
 mais seulement 0,7 % était consacré à l'objectif "Environnement".`,
 
-      question: `Quel est le pays qui, en 2024, a consacré la plus grande part de son budget R&D à l'objectif "Environnement" ?`,
+      question: `Quel est le pays qui, en 2024, a consacré la plus grande part de son budget total de R&D à l'objectif "Environnement" ?`,
 
       answer_type: "text",
       answer: "Finlande",
@@ -358,7 +358,7 @@ mais seulement 0,7 % était consacré à l'objectif "Environnement".`,
       hints: [
         `Créez un tableau croisé dynamique avec les propriétés suivantes :
 - **Zone de référence** dans la zone **Lignes**
-- **Objectifs socio-économiques** dans la zone **Colonnes**
+- **Objectif socio-économique** dans la zone **Colonnes**
 - **Valeur (USD PPA constant)** dans la zone **Valeurs** (vous aurez le même résultat avec les autres colonnes de valeur... pourquoi ?)
 - **TIME_PERIOD** dans la zone **Filtres**, filtré sur l'année 2024
 
