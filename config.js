@@ -151,7 +151,10 @@ mais souvenez-vous qu'il ne s'agit que d'un exemple : les observations que vous 
 `,
     },
     {
-      intro: `Une bonne pratique face à un nouveau tableau est de lire les valeurs extrêmes :
+      intro: `Par simplicité, dans la suite, nous allons ignorer les colonnes "Statut d'observation",
+mais souvenez-vous qu'il ne s'agit que d'un exemple : les observations que vous allez faire ne correspondent pas nécessairement à la réalité.
+
+Une bonne pratique face à un nouveau tableau est de lire les valeurs extrêmes :
 cela donne une idée de la gamme des valeurs et peut aider à identifier des cas particuliers, voire des erreurs dans les données.
 
 Remarquez qu'il y a 3 colonnes de "Valeur" :
