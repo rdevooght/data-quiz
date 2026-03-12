@@ -69,6 +69,9 @@ details .hint-box {
     border-left: 4px solid #667eea;
     border-radius: 0 0.5rem 0.5rem 0;
 }
+details .hint-box img {
+    cursor: zoom-in;
+}
 
 /* Progress bar */
 .progress {
@@ -103,4 +106,41 @@ input:focus-visible {
 img {
     max-width: 100%;
     height: auto;
+}
+
+/* Image modal */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 1050;
+}
+
+.image-modal__img {
+    max-width: 95vw;
+    max-height: 90vh;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    background: white;
+}
+
+.image-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1f2937;
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }

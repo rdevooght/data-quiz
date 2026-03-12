@@ -86,6 +86,9 @@ function quizApp() {
     wrongAnswer: false,
     wrongAnswerMessage: DEFAULT_WRONG_ANSWER_MESSAGE,
     liveMessage: "",
+    imageModalOpen: false,
+    imageModalSrc: "",
+    imageModalAlt: "",
 
     // ── Computed ────────────────────────────────
     get currentQuestion() {
@@ -287,6 +290,24 @@ function quizApp() {
 
     renderHint(hint) {
       return marked.parse(hint || "");
+    },
+
+    handleHintClick(event) {
+      const img = event.target?.closest?.("img");
+      if (!img || !img.src) return;
+      this.openImageModal(img.src, img.alt || "");
+    },
+
+    openImageModal(src, alt) {
+      this.imageModalSrc = src;
+      this.imageModalAlt = alt;
+      this.imageModalOpen = true;
+    },
+
+    closeImageModal() {
+      this.imageModalOpen = false;
+      this.imageModalSrc = "";
+      this.imageModalAlt = "";
     },
 
     syncAnswerForCurrent() {

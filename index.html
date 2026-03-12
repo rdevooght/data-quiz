@@ -261,7 +261,10 @@
                                         : ' '"
                                 ></span>
                             </summary>
-                            <div class="hint-box p-3 mt-2">
+                            <div
+                                class="hint-box p-3 mt-2"
+                                @click="handleHintClick($event)"
+                            >
                                 <div
                                     class="small"
                                     x-html="renderHint(hint)"
@@ -295,6 +298,32 @@
                 >
                     Rejouer
                 </button>
+            </div>
+
+            <!-- Image modal -->
+            <div
+                class="image-modal"
+                x-show="imageModalOpen"
+                x-cloak
+                role="dialog"
+                aria-modal="true"
+                aria-label="Agrandir l'image"
+                @keydown.escape.window="closeImageModal()"
+                @click.self="closeImageModal()"
+            >
+                <button
+                    type="button"
+                    class="image-modal__close"
+                    @click="closeImageModal()"
+                    aria-label="Fermer l'image"
+                >
+                    ✕
+                </button>
+                <img
+                    class="image-modal__img"
+                    :src="imageModalSrc"
+                    :alt="imageModalAlt"
+                />
             </div>
         </main>
         <!-- /quiz-card -->
