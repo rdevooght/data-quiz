@@ -19,11 +19,18 @@ ce qui veut dire que le fichier contient du texte et que chaque colonne est sép
 Vous pouvez l'ouvrir dans un éditeur de texte comme le bloc-notes pour en voir le contenu,
 mais ce n'est pas pratique de travailler dans le fichier comme ça : il vaut mieux l'importer dans un tableur (LibreOffice, Google Sheets, Excel, ...).
 
+Si vous utilisez LibreOffice, vous pouvez ouvrir le fichier directement avec LibreOffice Calc.
+Un menu d'option d'importation apparait qui vous permet de configurer comment le fichier doit être lu par le programme, mais vous pouvez en général garder les options par défaut et simplement cliquer sur "Ok".
+
+![screenshot du menu d'importation dans LibreOffice](img/libreoffice/import.png)
+
+Pour Google Sheets et Excel, il faut d'abord ouvrir un nouveau document, puis importer le fichier CSV.
+
 Voici comment faire dans Google Sheets :
-![Ouvrez le menu "Fichier", puis cliquez sur "Importer"](img/importer.png)
+![Ouvrez le menu "Fichier", puis cliquez sur "Importer"](img/sheets/importer.png)
 
 Puis allez sur l'onglet "Importer" et déposez-y le fichier CSV :
-![Screenshot du menu d'importation](img/importer2.png)
+![Screenshot du menu d'importation](img/sheets/importer2.png)
 Vous pouvez garder les options par défaut et cliquer sur "Importer les données".
 `,
         `Vous pouvez compter les colonnes manuellement, mais il y a une manière plus efficace de le faire :
@@ -33,9 +40,15 @@ En cliquant sur le "1" à gauche de la première ligne, vous sélectionnez toute
 En bas à droite s'affiche toujours un résumé des cases sélectionnées.
 Comme ici les cases contiennent du texte, les tableurs affichent en général le nombre de cases non vides.
 
-![Screenshot illustrant l'explication ci-dessus](img/nombre_colonnes.png)
+![Screenshot illustrant l'explication ci-dessus](img/sheets/nombre_colonnes.png)
 
-C'est le nombre de colonnes de notre tableau !`,
+C'est le nombre de colonnes de notre tableau !
+
+Par défaut, LibreOffice n'affiche que la moyenne et somme comme résumé de la sélection.
+Faites un clic droit sur cette zone et ajoutez "Compte de la sélection" aux statistiques affichées.
+
+![Gif illustrant l'ajout de "Compte de la sélection" aux statistiques](img/libreoffice/compte_selection.gif)
+`,
       ],
     },
     {
@@ -52,17 +65,29 @@ Par exemple, la colonne "Zone de référence" contient des noms de pays, et la c
         37: "Vous avez peut-être compté le nom de la colonne dans le nombre de pays ?",
       },
       hints: [
-        `Pour trouver le nombre de valeurs différentes dans une colonne, le plus simple est d'utiliser la fonction de filtre.
+        `**Google Sheets**
+
+Pour trouver le nombre de valeurs différentes dans une colonne, le plus simple est d'utiliser la fonction de filtre.
 
 Pour activer les filtres, cliquez sur une case du tableau puis sur le symbole d'entonnoir dans la barre d'outils :
 
-![Screenshot illustrant l'explication ci-dessus](img/filtre.png)
+![Screenshot illustrant l'explication ci-dessus](img/sheets/filtre.png)
 
 Un symbole apparaît dans la première case de chaque colonne.
 Cliquez sur ce symbole dans la colonne qui vous intéresse (Zone de référence ou REF_AREA).
 Un menu apparaît qui montre, entre autres, les valeurs uniques de cette colonne.
 
-![Screenshot illustrant l'explication ci-dessus](img/nunique.png)
+![Screenshot illustrant l'explication ci-dessus](img/sheets/nunique.png)
+
+**LibreOffice**
+
+Copiez la colonne "Zone de référence" (ou REF_AREA) dans une nouvelle feuille, puis allez dans l'onglet "Données" et cliquez sur "Doublons".
+Un menu apparait qui vous permet de supprimer les doublons dans la colonne.
+Une fois les doublons supprimé, vous trouverez facilement le nombre de pays différent en regardant le nombre de lignes restantes.
+
+Attention, c'est une opération qui peut prendre du temps sur un grand nombre de lignes.
+
+![Gif illustrant l'explication ci-dessus](img/libreoffice/count_unique.gif)
 `,
       ],
     },
@@ -84,14 +109,14 @@ Corrigez l'erreur avant de passer à la question suivante.
 
 *Un conseil* : avant de modifier les données, il est utile de dupliquer la feuille pour conserver une copie des données d'origine.
 
-![Pour dupliquer une feuille, cliquez sur la flèche à droite du nom de la feuille (en bas de l'écran), puis cliquez sur "Dupliquer".](img/copy_tab.gif)`,
+![Pour dupliquer une feuille, cliquez sur la flèche à droite du nom de la feuille (en bas de l'écran), puis cliquez sur "Dupliquer".](img/sheets/copy_tab.gif)`,
         `Il y a deux éléments très semblables dans la liste des valeurs différentes : "Énergie" et "energie".
 Vraisemblablement, il s'agit de la même catégorie, mais le tableur va les considérer comme des valeurs distinctes, ce qui mènerait sans doute à des problèmes.
 
 Toutes les autres catégories sont capitalisées, alors gardons "Énergie" comme valeur correcte.
 Utilisez la fonction de filtre sur la colonne "Objectif socio-économique" pour ne garder que la ligne contenant la valeur "energie", puis modifiez-la en "Énergie".
 
-![Gif illustrant la modification de la valeur "energie" en "Énergie"](img/correct_energie.gif)
+![Gif illustrant la modification de la valeur "energie" en "Énergie"](img/sheets/correct_energie.gif)
 `,
       ],
     },
@@ -116,7 +141,7 @@ Il doit donc manquer certaines données. C'est habituel pour ce genre de dataset
         `Vous pouvez filtrer sur plusieurs colonnes en même temps.
 Appliquez un filtre sur "Zone de référence" pour ne garder que la Belgique, puis sur "Objectif socio-économique" pour ne garder que l'objectif "Santé", et enfin sur "TIME_PERIOD" pour ne garder que l'année 2020.
 
-![Screenshot illustrant l'explication ci-dessus](img/filtre2.png)
+![Screenshot illustrant l'explication ci-dessus](img/sheets/filtre2.png)
 `,
         `Remarquez la colonne "Multiplicateur d'unité" : elle indique que les valeurs sont exprimées en millions.
 Il faut donc multiplier les valeurs par 1 million pour obtenir la réponse correcte.`,
@@ -175,7 +200,7 @@ Remarquez qu'il y a 3 colonnes de "Valeur" :
 Ensuite, utilisez la fonction de tri pour ordonner les valeurs du plus petit au plus grand.
 Le tri se fait en cliquant sur la même icône que pour le filtre, puis en sélectionnant "Trier de A à Z".
 
-![Menu de tri dans Google Sheets](img/sort.png)
+![Menu de tri dans Google Sheets](img/sheets/sort.png)
 
 Quand vous triez une colonne d'un tableau, les autres colonnes sont également triées dans le même ordre, pour que les valeurs de chaque ligne restent liées.`,
         `Si le tri ne semble pas avoir fonctionné correctement, c'est sans doute que les valeurs de la colonne sont interprétées comme du texte plutôt que comme des nombres.
@@ -185,11 +210,11 @@ Il faut donc remplacer les points par des virgules pour que les valeurs soient t
 
 Pour cela on peut utiliser la fonction "Remplacer" que l'on trouve en appuyant sur les touches CTRL+H, ou en cherchant "remplacer" dans la barre de recherche du menu :
 
-![Screenshot de la barre de recherche du menu](img/menu_search.png)
+![Screenshot de la barre de recherche du menu](img/sheets/menu_search.png)
 
 Dans le menu qui apparaît, entrez '.' dans le champ "Rechercher" et ',' dans le champ "Remplacer par". Cliquez ensuite sur "Remplacer tout".
 
-![Screenshot de la fonction Remplacer](img/replace.png)
+![Screenshot de la fonction Remplacer](img/sheets/replace.png)
 
 Si vous sélectionnez une plage de cellules avant d'ouvrir le menu de remplacement, seules les cellules sélectionnées seront modifiées.
 Ce n'est pas nécessaire dans notre cas, car dans ce dataset les points n'apparaissent que comme séparateur décimal, il faut donc tous les remplacer.
@@ -220,7 +245,7 @@ Il y a une quinzaine de cases à corriger. Vous pouvez le faire une par une, mai
 2. corrigez la valeur de la première ligne : remplacez 174 415 par 17 441 500.
 3. cliquez sur le coin inférieur droit de la cellule et faites glisser pour sélectionner toutes les lignes à corriger, cela va copier la valeur de la première ligne dans toutes les autres.
 
-![Gif illustrant les étapes 2 et 3 de la correction](img/copy_cell_value.gif)
+![Gif illustrant les étapes 2 et 3 de la correction](img/sheets/copy_cell_value.gif)
 `,
       ],
     },
@@ -251,7 +276,7 @@ On a multiplié le résultat par 1 million pour obtenir des dollars par habitant
 
 Quand vous aurez saisi la formule, Google Sheets vous proposera de la remplir automatiquement pour toute la colonne en copiant la formule. Acceptez cette suggestion.
 
-![Gif illustrant les instructions ci-dessus](img/valeur_par_hab.gif)
+![Gif illustrant les instructions ci-dessus](img/sheets/valeur_par_hab.gif)
 `,
       ],
     },
@@ -273,7 +298,7 @@ Sélectionnez toutes les cellules de la colonne "Valeur (monnaie nationale)".
 En bas à droite, vous devriez voir la somme des valeurs sélectionnées.
 Vous pouvez cliquer sur cette information pour afficher d'autres statistiques, par exemple la moyenne ou la valeur maximale.
 
-![Gif illustrant les étapes ci-dessus](img/total_value.gif)`,
+![Gif illustrant les étapes ci-dessus](img/sheets/total_value.gif)`,
       ],
     },
     {
@@ -305,13 +330,13 @@ Dans le panneau qui apparaît à droite, configurez le tableau ainsi :
 - Dans **Valeurs**, ajoutez "Valeur/hab (USD PPA courant)", en choisissant **SOMME** comme fonction de synthèse : on veut calculer la somme des budgets par habitant.
 - Dans **Filtres**, ajoutez "TIME_PERIOD" et ne gardez que la valeur 2024.
 
-![Gif illustrant la création du tableau croisé dynamique](img/pivot_table.gif)`,
+![Gif illustrant la création du tableau croisé dynamique](img/sheets/pivot_table.gif)`,
         `Pour trouver facilement le pays avec le budget par habitant le plus élevé, il faut trier le tableau.
 
 Pour trier le tableau croisé dynamique, retrouvez l'élément "Zone de référence" dans la zone "Lignes" du panneau de configuration,
 et changez l'option "Trier par".
 
-![Gif illustrant le tri du tableau croisé dynamique](img/sort_pivot_table.gif)`,
+![Gif illustrant le tri du tableau croisé dynamique](img/sheets/sort_pivot_table.gif)`,
       ],
     },
     {
@@ -334,21 +359,21 @@ La première chose à faire est donc de créer une colonne contenant le budget p
 puis d'utiliser cette nouvelle colonne comme champ de valeur dans le tableau croisé dynamique.`,
         `Pour avoir une colonne par année, il suffit de modifier le tableau précédent en déplaçant "TIME_PERIOD" de la zone "Filtres" vers la zone "Colonnes".
 
-![Gif illustrant la création du tableau croisé dynamique](img/2dim_pivot_table.gif)
+![Gif illustrant la création du tableau croisé dynamique](img/sheets/2dim_pivot_table.gif)
 
 Il reste encore à comparer les valeurs pour chaque pays en 2022 et en 2015.
 Ici, le plus efficace est d'utiliser une formule, suivie d'une mise en forme conditionnelle.
 Ouvrez le prochain indice pour en savoir plus.`,
         `Créez une colonne à côté du tableau croisé dynamique dans laquelle vous calculez la différence entre les budgets par habitant en 2022 et en 2015 pour chaque pays.
 
-![Gif illustrant la création de la colonne avec les différences](img/diff_col.gif)
+![Gif illustrant la création de la colonne avec les différences](img/sheets/diff_col.gif)
 
 Il faut maintenant compter le nombre de valeurs négatives dans cette colonne.
 
 Vous pouvez le faire manuellement, mais c'est l'occasion de découvrir une autre fonctionnalité des tableurs : la mise en forme conditionnelle.
 Dans Google Sheets, sélectionnez la colonne avec les différences et allez dans le menu **Format > Mise en forme conditionnelle**.
 
-![Gif illustrant la mise en forme conditionnelle](img/mise_en_forme_condi.gif)`,
+![Gif illustrant la mise en forme conditionnelle](img/sheets/mise_en_forme_condi.gif)`,
       ],
     },
     {
@@ -379,7 +404,7 @@ Il est possible de configurer le tableau pour afficher cela, mais comment ?`,
         `Dans la zone Valeur, modifiez l'option "Afficher en tant que" pour choisir "Pourcentage du total d'une ligne"
 (ou "Pourcentage du total d'une colonne" si vous avez mis les pays en colonnes et les objectifs en lignes).
 
-![Gif illustrant le choix de l'option "Pourcentage du total d'une ligne"](img/pivot_perc.gif)
+![Gif illustrant le choix de l'option "Pourcentage du total d'une ligne"](img/sheets/pivot_perc.gif)
 
 Maintenant, chaque ligne somme à 100 % du budget, et chaque case donne le pourcentage du budget total du pays pour cet objectif.
 
@@ -391,7 +416,7 @@ Cliquez à la place sur l'onglet "Dégradé de couleur", gardez les options par 
 
 Les cases de cette colonne sont maintenant colorées d'un vert d'autant plus intense que la valeur de la case est élevée.
 
-![Gif illustrant la mise en forme conditionnelle avec un dégradé de couleur](img/degrade_couleur.gif)
+![Gif illustrant la mise en forme conditionnelle avec un dégradé de couleur](img/sheets/degrade_couleur.gif)
 `,
       ],
     },
