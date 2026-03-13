@@ -17,13 +17,14 @@ function overviewApp() {
 
     async fetch() {
       try {
-        const res = await fetch(`${API_BASE}/latest?quiz_id=${QUIZ_ID}`);
+        const res = await fetch(`${API_BASE}/progress?quiz_id=${QUIZ_ID}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
+        console.log(data);
         // Sort: furthest along first, then alphabetically
         this.participants = (data.data || []).sort((a, b) => {
-          const qa = a.question_id ?? -1;
-          const qb = b.question_id ?? -1;
+          const qa = a.num_correct ?? -1;
+          const qb = b.num_correct ?? -1;
           if (qb !== qa) return qb - qa;
           return (a.person_name || "").localeCompare(b.person_name || "");
         });
@@ -39,8 +40,8 @@ function overviewApp() {
     // null means not started → position at 0.
     progress(p) {
       const total = this.config.questions.length;
-      if (p.question_id == null) return 0;
-      return Math.min((p.question_id + 1) / total, 1);
+      if (p.num_correct == null) return 0;
+      return Math.min(p.num_correct / total, 1);
     },
   };
 }
