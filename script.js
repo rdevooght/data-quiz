@@ -38,7 +38,7 @@ async function apiAddAnswer(
         quiz_id: QUIZ_ID,
         person_id: personId,
         question_id: questionId,
-        question_text: questionText,
+        question: questionText,
         answer: answerValue,
         is_correct: isCorrect,
       }),
@@ -211,7 +211,6 @@ function quizApp() {
       );
 
       if (isCorrect) {
-
         this.wrongAnswer = false;
         this.wrongAnswerMessage = DEFAULT_WRONG_ANSWER_MESSAGE;
         this.answers[this.currentIndex] = rawAnswer;
@@ -323,8 +322,7 @@ function quizApp() {
     focusCurrentInput() {
       this.$nextTick(() => {
         if (this.currentAnswerType === "choice") {
-          const firstChoice =
-            this.$refs.choiceGroup?.querySelector("input");
+          const firstChoice = this.$refs.choiceGroup?.querySelector("input");
           firstChoice?.focus();
           return;
         }
