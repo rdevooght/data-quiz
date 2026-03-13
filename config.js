@@ -159,7 +159,7 @@ cela donne une idée de la gamme des valeurs et peut aider à identifier des cas
 
 Remarquez qu'il y a 3 colonnes de "Valeur" :
 - **Valeur (monnaie nationale)** : le montant dans la monnaie du pays
-- **Valeur (USD PPA courant)** : les dollars en parité de pouvoir d'achat (USD PPA) sont une unité qui ajuste les montants d'argent entre pays pour tenir compte des différences de prix. C'est utile pour comparer les budgets de différents pays entre eux.
+- **Valeur (USD PPA courant)** : les dollars en parité de pouvoir d'achat (USD PPA) sont une unité qui ajuste les montants d'argent entre pays pour tenir compte des différences de prix. C'est utile pour comparer les budgets de différents pays entre eux pour une année donnée.
 - **Valeur (USD PPA constant)** : les dollars PPA constants sont ajustés pour tenir compte de l'inflation, et permettent ainsi de comparer les budgets à travers les années.`,
       question:
         "Quel pays avait le plus petit budget pour l'objectif 'Santé' en 2020 ?",
@@ -229,7 +229,7 @@ Il y a une quinzaine de cases à corriger. Vous pouvez le faire une par une, mai
 Il serait plus intéressant de comparer les pays par rapport à leur budget *par habitant*.
 
 Cette donnée n'existe pas encore dans le tableau.
-Pour répondre à cette question, essayez de créer une nouvelle colonne contenant le budget (en USD PPA constant) par habitant.`,
+Pour répondre à cette question, essayez de créer une nouvelle colonne contenant le budget (en USD PPA courant) par habitant.`,
       question: `Quel pays avait le plus petit budget "Santé" *par habitant* en 2020 ?`,
       answer_type: "text",
       answer: "Turquie",
@@ -238,15 +238,15 @@ Pour répondre à cette question, essayez de créer une nouvelle colonne contena
       },
       hints: [
         `Créez une nouvelle colonne pour y calculer le budget par habitant.
-Pour insérer une colonne après la colonne "Valeur (USD PPA constant)", faites un clic droit sur la colonne et choisissez "Insérer une colonne à droite".
-Donnez-lui un nom explicite, par exemple "Valeur/hab (USD PPA constant)".
+Pour insérer une colonne après la colonne "Valeur (USD PPA courant)", faites un clic droit sur la colonne et choisissez "Insérer une colonne à droite".
+Donnez-lui un nom explicite, par exemple "Valeur/hab (USD PPA courant)".
 
 Ensuite, il faut remplir cette colonne à l'aide d'une formule.
 Assurez-vous qu'il n'y a aucun filtre actif, puis allez dans la première cellule de la colonne pour taper la formule.
 Les formules commencent toujours par un signe égal (=), et font référence aux autres cellules par la lettre de leur colonne suivie du numéro de ligne.
 
-Dans notre cas, la valeur (USD PPA constant) est dans la colonne J, et la population dans la colonne U.
-La formule serait donc =J2/U2*1000000 pour la première ligne (qui est la ligne 2, car la ligne 1 est l'en-tête).
+Dans notre cas, la valeur (USD PPA courant) est dans la colonne I, et la population dans la colonne U.
+La formule serait donc =I2/U2*1000000 pour la première ligne (qui est la ligne 2, car la ligne 1 est l'en-tête).
 On a multiplié le résultat par 1 million pour obtenir des dollars par habitant (rappelez-vous que les autres colonnes "Valeur" sont exprimées en millions).
 
 Quand vous aurez saisi la formule, Google Sheets vous proposera de la remplir automatiquement pour toute la colonne en copiant la formule. Acceptez cette suggestion.
@@ -257,12 +257,13 @@ Quand vous aurez saisi la formule, Google Sheets vous proposera de la remplir au
     },
     {
       intro: `Pour la question suivante, basez-vous sur la colonne "Valeur (monnaie nationale)"`,
-      question: `Quel a été le budget R&D total de la Belgique en 2024 (en euros) ?`,
+      question: `Quel a été le budget R&D total de la Belgique en 2024 (en *millions* d'euros) ?`,
       answer_type: "number",
-      answer: 3952667520,
+      answer: 3953,
       error_hints: {
-        3952: "N'oubliez pas de multiplier par 1 000 000 pour obtenir le montant en euros.",
-        3953: "N'oubliez pas de multiplier par 1 000 000 pour obtenir le montant en euros.",
+        3952: "Vous avez fait une erreur d'arrondi.",
+        3952667520: "Donnez la réponse en millions d'euros.",
+        3952670000: "Donnez la réponse en millions d'euros.",
       },
       hints: [
         `Regardez ce qui s'affiche en bas à droite de la feuille quand vous sélectionnez un groupe de cellules.`,
@@ -282,16 +283,18 @@ Pour ce genre d'opération, les tableurs offrent un outil très puissant : les *
 Les tableaux croisés dynamiques permettent de résumer un grand tableau en regroupant les lignes en fonction des valeurs d'une ou plusieurs colonnes (par exemple les pays, l'année, l'objectif),
 et en agrégeant pour chaque groupe les valeurs d'une autre colonne (par exemple en calculant la somme ou la moyenne des budgets, de la population, etc.).`,
 
-      question: `Quel pays avait le budget R&D total **par habitant** le plus élevé en 2024 ?`,
+      question: `Quel pays avait le budget R&D total **par habitant** le plus élevé en 2020 ?`,
 
       answer_type: "text",
-      answer: "suisse",
+      answer: "luxembourg",
       error_hints: {
         "États-Unis":
           "On s'intéresse ici au budget par habitant, pas au budget total.",
         USA: "On s'intéresse ici au budget par habitant, pas au budget total.",
         Japon:
           "On s'intéresse ici au budget par habitant, pas au budget total, et sûrement pas en devise locale.",
+        suisse:
+          "Pour une comparaison entre pays pour une année donnée, il est préférable de se baser sur les budgets en USD PPA courant plutôt qu'en USD PPA constant. Sans oublier de rapporter au nombre de habitants.",
       },
       hints: [
         `Pour créer un tableau croisé dynamique dans Google Sheets, cliquez sur une cellule du tableau, puis allez dans le menu **Insertion > Tableau croisé dynamique**.
@@ -299,7 +302,7 @@ Google Sheets vous proposera de l'insérer dans une nouvelle feuille — accepte
 
 Dans le panneau qui apparaît à droite, configurez le tableau ainsi :
 - Dans **Lignes**, ajoutez "Zone de référence" : on veut grouper les données par pays.
-- Dans **Valeurs**, ajoutez "Valeur/hab (USD PPA constant)", en choisissant **SOMME** comme fonction de synthèse : on veut calculer la somme des budgets par habitant.
+- Dans **Valeurs**, ajoutez "Valeur/hab (USD PPA courant)", en choisissant **SOMME** comme fonction de synthèse : on veut calculer la somme des budgets par habitant.
 - Dans **Filtres**, ajoutez "TIME_PERIOD" et ne gardez que la valeur 2024.
 
 ![Gif illustrant la création du tableau croisé dynamique](img/pivot_table.gif)`,
@@ -317,12 +320,18 @@ Il est possible de grouper les données par plusieurs critères en utilisant aus
 
 Pour cette question, essayez de créer un tableau qui contient une ligne par pays, et une colonne par année.`,
 
-      question: `Combien de pays ont un budget R&D par habitant plus *faible* en **2022** qu'en **2015** ?`,
+      question: `Combien de pays ont un budget R&D par habitant plus *faible* en **2022** qu'en **2015**, en corrigeant pour l'inflation ?`,
 
       answer_type: "number",
       answer: 6,
-      error_hints: {},
+      error_hints: {
+        1: "Si on compare des budgets entre années, il vaut mieux se baser sur les budgets en USD PPA constant plutôt qu'en USD PPA courant. Sans oublier de rapporter au nombre de habitants.",
+      },
       hints: [
+        `Pour corriger pour l'inflation, il faut utiliser les budgets en USD PPA constant plutôt que les budgets en USD PPA courant.
+
+La première chose à faire est donc de créer une colonne contenant le budget par habitant en USD PPA constant,
+puis d'utiliser cette nouvelle colonne comme champ de valeur dans le tableau croisé dynamique.`,
         `Pour avoir une colonne par année, il suffit de modifier le tableau précédent en déplaçant "TIME_PERIOD" de la zone "Filtres" vers la zone "Colonnes".
 
 ![Gif illustrant la création du tableau croisé dynamique](img/2dim_pivot_table.gif)
