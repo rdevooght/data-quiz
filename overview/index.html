@@ -11,6 +11,7 @@
         ></script>
 
         <script src="../config.js"></script>
+        <script type="module" src="../minidenticons/minidenticons.min.js"></script>
         <link rel="stylesheet" href="style.css" />
     </head>
     <body x-data="overviewApp()" x-init="init()">
@@ -27,7 +28,6 @@
 
         <!-- Labels -->
         <div class="track-labels">
-            <span class="label-name">Participant</span>
             <span class="label-track">
                 <span>Start</span>
                 <span>Finish</span>
@@ -46,13 +46,6 @@
 
             <template x-for="p in participants" :key="p.person_id">
                 <div class="participant-row">
-                    <!-- Name -->
-                    <div
-                        class="p-name"
-                        :class="{ unnamed: !p.person_name }"
-                        x-text="p.person_name || 'anonymous'"
-                    ></div>
-
                     <!-- Track -->
                     <div class="track">
                         <div class="line line-start"></div>
@@ -65,21 +58,31 @@
                             :style="`width: calc(${progress(p) * 100}% )`"
                         ></div>
 
-                        <!-- Runner dot -->
+                        <!-- Runner avatar -->
                         <div
                             class="runner-wrap"
                             :style="`left: ${progress(p) * 100}%`"
                         >
                             <div
-                                class="runner-dot"
+                                class="runner-avatar"
                                 :class="{
                 'at-finish':   progress(p) >= 1,
                 'not-started': p.question_id == null
               }"
-                            ></div>
+                            >
+                                <minidenticon-svg
+                                    :username="avatarSeed(p)"
+                                    saturation="80"
+                                    lightness="46"
+                                ></minidenticon-svg>
+                            </div>
                             <span
                                 class="q-label"
                                 x-text="p.question_id != null ? 'Q' + p.question_id : ''"
+                            ></span>
+                            <span
+                                class="p-tooltip"
+                                x-text="p.person_name || 'anonymous'"
                             ></span>
                         </div>
                     </div>
