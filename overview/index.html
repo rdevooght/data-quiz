@@ -11,7 +11,9 @@
         ></script>
 
         <script src="../config.js"></script>
-        <script type="module" src="../minidenticons/minidenticons.min.js"></script>
+        <script type="module">
+            import { minidenticonSvg } from "https://cdn.jsdelivr.net/npm/minidenticons@4.2.1/minidenticons.min.js";
+        </script>
         <link rel="stylesheet" href="style.css" />
     </head>
     <body x-data="overviewApp()" x-init="init()">
@@ -67,7 +69,7 @@
                                 class="runner-avatar"
                                 :class="{
                 'at-finish':   progress(p) >= 1,
-                'not-started': p.question_id == null
+                'not-started': progress(p) == 0
               }"
                             >
                                 <minidenticon-svg

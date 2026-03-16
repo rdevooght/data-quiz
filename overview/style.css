@@ -17,7 +17,7 @@
     --track: #1c1c1c;
     --dot-size: 10px;
     --row-h: 56px;
-    --avatar-size: 26px;
+    --avatar-size: 46px;
 }
 
 body {
@@ -158,13 +158,15 @@ h1 {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
 }
 .runner-avatar.at-finish {
     border-color: var(--finish);
 }
 .runner-avatar.not-started {
-    opacity: 0.45;
+    opacity: 0.75;
     filter: grayscale(0.4);
 }
 .runner-avatar minidenticon-svg svg {
@@ -216,7 +218,9 @@ h1 {
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
 }
 .runner-wrap:hover .p-tooltip {
     opacity: 1;

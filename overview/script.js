@@ -45,8 +45,8 @@ function overviewApp() {
     },
 
     avatarSeed(p) {
-      if (p.person_name) return p.person_name;
       if (p.person_id != null) return `id-${p.person_id}`;
+      if (p.person_name) return p.person_name;
       return "anonymous";
     },
   };
