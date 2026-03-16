@@ -29,11 +29,15 @@
         </header>
 
         <!-- Labels -->
-        <div class="track-labels">
-            <span class="label-track">
-                <span>Start</span>
-                <span>Finish</span>
-            </span>
+        <div class="question-axis" x-show="config.questions.length">
+            <span class="question-tick" :style="`left: 0`">Start</span>
+            <template x-for="(q, idx) in config.questions" :key="idx">
+                <span
+                    class="question-tick"
+                    :style="`left: ${config.questions.length === 1 ? 0 : ((idx+1) / (config.questions.length)) * 100}%`"
+                    x-text="`${idx < config.questions.length - 1 ? idx + 1 : 'Finish'}`"
+                ></span>
+            </template>
         </div>
         <div class="divider"></div>
 
@@ -92,7 +96,7 @@
             </template>
         </div>
 
-        <footer x-text="`Last updated: ${lastUpdated || '—'}`"></footer>
+        <footer x-text="`Mise à jour : ${lastUpdated || '—'}`"></footer>
         <script src="script.js"></script>
     </body>
 </html>

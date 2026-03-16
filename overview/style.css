@@ -10,8 +10,8 @@
     --bg: #0e0e0e;
     --surface: #161616;
     --border: #272727;
-    --text: #e8e8e8;
-    --muted: #555;
+    --text: white;
+    --muted: #e8e8e8;
     --accent: #e8ff47; /* single pop of colour */
     --finish: #ff6b3d;
     --track: #1c1c1c;
@@ -92,6 +92,24 @@ h1 {
     color: var(--muted);
     display: flex;
     justify-content: space-between;
+}
+
+/* Question axis */
+.question-axis {
+    position: relative;
+    height: 24px;
+    margin-bottom: 8px;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+.question-tick {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 /* Divider */
