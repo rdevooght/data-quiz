@@ -7,7 +7,7 @@ const quizConfig = {
 
 Il s'agit d'un fichier contenant des informations sur les budgets R&D de différents pays entre 2014 et 2024.
 Les données de base proviennent de l'[OCDE](https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CScience%252C%20technology%20and%20innovation%23INT%23%7CResearch%20and%20development%20(R%26D)%23INT_RD%23&pg=0&fc=Topic&bp=true&snb=19&vw=tb&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_RDS_GOV%40DF_GBARD_NABS07&df[ag]=OECD.STI.STP&df[vs]=1.0&dq=.A.....XDC.&pd=2015%2C&to[TIME_PERIOD]=false&isAvailabilityDisabled=false),
-mais on été modifiées et réorganisées pour les besoins de ce quiz.
+mais ont été modifiées et réorganisées pour les besoins de ce quiz.
 
 Votre premier objectif est d'ouvrir le fichier dans un tableur (LibreOffice, Google Sheets, Excel, ...).`,
       question: "Combien de colonnes y a-t-il dans le tableau ?",
@@ -20,7 +20,7 @@ Vous pouvez l'ouvrir dans un éditeur de texte comme le bloc-notes pour en voir 
 mais ce n'est pas pratique de travailler dans le fichier comme ça : il vaut mieux l'importer dans un tableur (LibreOffice, Google Sheets, Excel, ...).
 
 Si vous utilisez LibreOffice, vous pouvez ouvrir le fichier directement avec LibreOffice Calc.
-Un menu d'option d'importation apparait qui vous permet de configurer comment le fichier doit être lu par le programme, mais vous pouvez en général garder les options par défaut et simplement cliquer sur "Ok".
+Un menu d'option d'importation apparaît qui vous permet de configurer comment le fichier doit être lu par le programme, mais vous pouvez en général garder les options par défaut et simplement cliquer sur "Ok".
 
 ![screenshot du menu d'importation dans LibreOffice](img/libreoffice/import.png)
 
@@ -44,7 +44,7 @@ Comme ici les cases contiennent du texte, les tableurs affichent en général le
 
 C'est le nombre de colonnes de notre tableau !
 
-Par défaut, LibreOffice n'affiche que la moyenne et somme comme résumé de la sélection.
+Par défaut, LibreOffice n'affiche que la moyenne et la somme comme résumé de la sélection.
 Faites un clic droit sur cette zone et ajoutez "Compte de la sélection" aux statistiques affichées.
 
 ![Gif illustrant l'ajout de "Compte de la sélection" aux statistiques](img/libreoffice/compte_selection.gif)
@@ -82,8 +82,8 @@ Un menu apparaît qui montre, entre autres, les valeurs uniques de cette colonne
 **LibreOffice**
 
 Copiez la colonne "Zone de référence" (ou REF_AREA) dans une nouvelle feuille, puis allez dans l'onglet "Données" et cliquez sur "Doublons".
-Un menu apparait qui vous permet de supprimer les doublons dans la colonne.
-Une fois les doublons supprimé, vous trouverez facilement le nombre de pays différent en regardant le nombre de lignes restantes.
+Un menu apparaît qui vous permet de supprimer les doublons dans la colonne.
+Une fois les doublons supprimés, vous trouverez facilement le nombre de pays différents en regardant le nombre de lignes restantes.
 
 Attention, c'est une opération qui peut prendre du temps sur un grand nombre de lignes.
 
@@ -118,8 +118,8 @@ Utilisez la fonction de filtre sur la colonne "Objectif socio-économique" pour 
 
 ![Gif illustrant la modification de la valeur "energie" en "Énergie"](img/sheets/correct_energie.gif)
 
-Si vous n'avez pas encore activé les filtres sur votre tableur, cliquez sur une cellule du tableau puis cliquez sur l'icone en forme d'entoinnoir dans la barre d'outils.
-Dans LibreOffice l'icone ressemble à ceci : ![Icone d'une baguette magique orange devant un entonnoir blanc](img/libreoffice/filter_icon.png)
+Si vous n'avez pas encore activé les filtres sur votre tableur, cliquez sur une cellule du tableau puis cliquez sur l'icône en forme d'entonnoir dans la barre d'outils.
+Dans LibreOffice l'icône ressemble à ceci : ![Icone d'une baguette magique orange devant un entonnoir blanc](img/libreoffice/filter_icon.png)
 `,
       ],
     },
@@ -167,7 +167,7 @@ Elles sont vides la plupart du temps, mais contiennent parfois des valeurs comme
 Ces annotations indiquent des limitations ou des problèmes avec les données.
 
 Pour la ligne correspondant au budget du Canada pour l'objectif "Environnement" en 2017, la colonne "Statut d'observation" indique "Rupture de série".
-C'est une expression utilisée pour indiquer que les valeurs ont été calculées d'une manière différente de la fois précédente, et qu'on ne peut donc pas faire de comparaison avec les valeurs précédentes.
+C'est une expression utilisée pour indiquer que les valeurs ont été calculées d'une manière différente de la fois précédente, et qu'on ne peut donc pas les comparer avec les valeurs précédentes.
 `,
       ],
       outro: `Un dataset est toujours une approximation de la réalité.
@@ -250,8 +250,8 @@ Il y a une quinzaine de cases à corriger. Vous pouvez le faire une par une, mai
 
 ![Gif illustrant les étapes 2 et 3 de la correction](img/sheets/copy_cell_value.gif)
 
-**Attention**: Dans LibreOffice et Excel, faire glisser la sélection de cette manière va parfois automatiquement incrémenter la valeur d'une cellule à l'autre.
-Pour éviter cela, vous pouvez commencer par écrire la même valeur dans les deux première cellules, sélectionner les deux cellules, puis faire glisser pour copier la valeur.
+**Attention** : Dans LibreOffice et Excel, faire glisser la sélection de cette manière va parfois automatiquement incrémenter la valeur d'une cellule à l'autre.
+Pour éviter cela, vous pouvez commencer par écrire la même valeur dans les deux premières cellules, sélectionner les deux cellules, puis faire glisser pour copier la valeur.
 
 ![Gif illustrant la démarche décrite ci-dessus dans LibreOffice Calc](img/libreoffice/copy_cell_value.gif)
 `,
@@ -280,7 +280,7 @@ Les formules commencent toujours par un signe égal (=), et font référence aux
 
 Dans notre cas, la valeur (USD PPA courant) est dans la colonne I, et la population dans la colonne U.
 La formule serait donc =I2/U2*1000000 pour la première ligne (qui est la ligne 2, car la ligne 1 est l'en-tête).
-On a multiplié le résultat par 1 million pour obtenir des dollars par habitant (rappelez-vous que les autres colonnes "Valeur" sont exprimées en millions).
+On multiplie le résultat par 1 million pour obtenir des dollars par habitant (rappelez-vous que les autres colonnes "Valeur" sont exprimées en millions).
 
 Quand vous aurez saisi la formule, Google Sheets vous proposera de la remplir automatiquement pour toute la colonne en copiant la formule. Acceptez cette suggestion.
 
@@ -327,7 +327,7 @@ et en agrégeant pour chaque groupe les valeurs d'une autre colonne (par exemple
         Japon:
           "On s'intéresse ici au budget par habitant, pas au budget total, et sûrement pas en devise locale.",
         suisse:
-          "Pour une comparaison entre pays pour une année donnée, il est préférable de se baser sur les budgets en USD PPA courant plutôt qu'en USD PPA constant. Sans oublier de rapporter au nombre de habitants.",
+          "Pour une comparaison entre pays pour une année donnée, il est préférable de se baser sur les budgets en USD PPA courant plutôt qu'en USD PPA constant. Sans oublier de rapporter au nombre d'habitants.",
       },
       hints: [
         `**Google Sheets**
@@ -348,8 +348,8 @@ Cliquez sur une cellule du tableau, puis allez dans le menu **Insérer** et cliq
 Un premier panneau de configuration s'ouvre, vous demandant de confirmer la source de données.
 Normalement, les données sont déjà sélectionnées pour vous, vous pouvez donc cliquer sur "OK".
 
-Un second panneau de configuration s'ouvre, dans lequel vous pouvez choisir les lignes, colonnes, filtres et valeur du tableau dynamique.
-Configurez le ainsi:
+Un second panneau de configuration s'ouvre, dans lequel vous pouvez choisir les lignes, colonnes, filtres et valeurs du tableau dynamique.
+Configurez-le ainsi :
 
 - Dans **Champs de ligne**, ajoutez "Zone de référence" : on veut grouper les données par pays.
 - Dans **Champs de données**, ajoutez "Valeur/hab (USD PPA courant)". Par défaut, le tableau affichera la somme des budgets par habitant de chaque pays.
@@ -391,7 +391,7 @@ Pour cette question, essayez de créer un tableau qui contient une ligne par pay
       answer_type: "number",
       answer: 6,
       error_hints: {
-        1: "Si on compare des budgets entre années, il vaut mieux se baser sur les budgets en USD PPA constant plutôt qu'en USD PPA courant. Sans oublier de rapporter au nombre de habitants.",
+        1: "Si on compare des budgets entre années, il vaut mieux se baser sur les budgets en USD PPA constant plutôt qu'en USD PPA courant. Sans oublier de rapporter au nombre d'habitants.",
       },
       hints: [
         `Pour corriger pour l'inflation, il faut utiliser les budgets en USD PPA constant plutôt que les budgets en USD PPA courant.
@@ -417,7 +417,7 @@ Dans **Google Sheets**, sélectionnez la colonne avec les différences et allez 
 
 ![Gif illustrant la mise en forme conditionnelle](img/sheets/mise_en_forme_condi.gif)
 
-Dans **LibreOffice Calc**, sélectionnez les valeurs à formatter, puis cliquez sur le bouton "Conditionnel" dans l'onglet "Origine".
+Dans **LibreOffice Calc**, sélectionnez les valeurs à formater, puis cliquez sur le bouton "Conditionnel" dans l'onglet "Origine".
 Dans le menu qui s'affiche, choisissez "Condition..." puis "Inférieur à...".
 
 Une nouvelle fenêtre s'ouvre, indiquez "0" comme valeur de référence, puis cliquez sur "OK".
@@ -431,7 +431,7 @@ mais il est aussi intéressant d'analyser quelle part du budget R&D total est di
 Cela donne une idée des priorités de R&D pour chaque pays.
 
 Par exemple, en 2024, près de 33 % du budget R&D de la Belgique est consacré à l'objectif "Production et technologie industrielles",
-mais seulement 0,7 % était consacré à l'objectif "Environnement".`,
+mais seulement 0,7 % est consacré à l'objectif "Environnement".`,
 
       question: `Quel est le pays qui, en 2024, a consacré la plus grande part de son budget total de R&D à l'objectif "Environnement" ?`,
 
