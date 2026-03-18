@@ -1,3 +1,4 @@
+- close hints when moving to next question
 - ajouter une outro et passage manuel à la question suivante
 - revoir le design
 - add explanations for LibreOffice

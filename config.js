@@ -117,6 +117,9 @@ Toutes les autres catégories sont capitalisées, alors gardons "Énergie" comme
 Utilisez la fonction de filtre sur la colonne "Objectif socio-économique" pour ne garder que la ligne contenant la valeur "energie", puis modifiez-la en "Énergie".
 
 ![Gif illustrant la modification de la valeur "energie" en "Énergie"](img/sheets/correct_energie.gif)
+
+Si vous n'avez pas encore activé les filtres sur votre tableur, cliquez sur une cellule du tableau puis cliquez sur l'icone en forme d'entoinnoir dans la barre d'outils.
+Dans LibreOffice l'icone ressemble à ceci : ![Icone d'une baguette magique orange devant un entonnoir blanc](img/libreoffice/filter_icon.png)
 `,
       ],
     },
@@ -246,6 +249,11 @@ Il y a une quinzaine de cases à corriger. Vous pouvez le faire une par une, mai
 3. cliquez sur le coin inférieur droit de la cellule et faites glisser pour sélectionner toutes les lignes à corriger, cela va copier la valeur de la première ligne dans toutes les autres.
 
 ![Gif illustrant les étapes 2 et 3 de la correction](img/sheets/copy_cell_value.gif)
+
+**Attention**: Dans LibreOffice et Excel, faire glisser la sélection de cette manière va parfois automatiquement incrémenter la valeur d'une cellule à l'autre.
+Pour éviter cela, vous pouvez commencer par écrire la même valeur dans les deux première cellules, sélectionner les deux cellules, puis faire glisser pour copier la valeur.
+
+![Gif illustrant la démarche décrite ci-dessus dans LibreOffice Calc](img/libreoffice/copy_cell_value.gif)
 `,
       ],
     },
@@ -308,7 +316,7 @@ Pour ce genre d'opération, les tableurs offrent un outil très puissant : les *
 Les tableaux croisés dynamiques permettent de résumer un grand tableau en regroupant les lignes en fonction des valeurs d'une ou plusieurs colonnes (par exemple les pays, l'année, l'objectif),
 et en agrégeant pour chaque groupe les valeurs d'une autre colonne (par exemple en calculant la somme ou la moyenne des budgets, de la population, etc.).`,
 
-      question: `Quel pays avait le budget R&D total **par habitant** le plus élevé en 2020 ?`,
+      question: `Quel pays avait le budget R&D total **par habitant** le plus élevé en 2024 ?`,
 
       answer_type: "text",
       answer: "luxembourg",
@@ -322,7 +330,9 @@ et en agrégeant pour chaque groupe les valeurs d'une autre colonne (par exemple
           "Pour une comparaison entre pays pour une année donnée, il est préférable de se baser sur les budgets en USD PPA courant plutôt qu'en USD PPA constant. Sans oublier de rapporter au nombre de habitants.",
       },
       hints: [
-        `Pour créer un tableau croisé dynamique dans Google Sheets, cliquez sur une cellule du tableau, puis allez dans le menu **Insertion > Tableau croisé dynamique**.
+        `**Google Sheets**
+
+Pour créer un tableau croisé dynamique dans Google Sheets, cliquez sur une cellule du tableau, puis allez dans le menu **Insertion > Tableau croisé dynamique**.
 Google Sheets vous proposera de l'insérer dans une nouvelle feuille — acceptez.
 
 Dans le panneau qui apparaît à droite, configurez le tableau ainsi :
@@ -330,13 +340,44 @@ Dans le panneau qui apparaît à droite, configurez le tableau ainsi :
 - Dans **Valeurs**, ajoutez "Valeur/hab (USD PPA courant)", en choisissant **SOMME** comme fonction de synthèse : on veut calculer la somme des budgets par habitant.
 - Dans **Filtres**, ajoutez "TIME_PERIOD" et ne gardez que la valeur 2024.
 
-![Gif illustrant la création du tableau croisé dynamique](img/sheets/pivot_table.gif)`,
+![Gif illustrant la création du tableau croisé dynamique](img/sheets/pivot_table.gif)
+
+**LibreOffice Calc**
+
+Cliquez sur une cellule du tableau, puis allez dans le menu **Insérer** et cliquez sur l'icône **Table dynamique**.
+Un premier panneau de configuration s'ouvre, vous demandant de confirmer la source de données.
+Normalement, les données sont déjà sélectionnées pour vous, vous pouvez donc cliquer sur "OK".
+
+Un second panneau de configuration s'ouvre, dans lequel vous pouvez choisir les lignes, colonnes, filtres et valeur du tableau dynamique.
+Configurez le ainsi:
+
+- Dans **Champs de ligne**, ajoutez "Zone de référence" : on veut grouper les données par pays.
+- Dans **Champs de données**, ajoutez "Valeur/hab (USD PPA courant)". Par défaut, le tableau affichera la somme des budgets par habitant de chaque pays.
+Vous pouvez choisir une autre manière de synthétiser les données (moyenne, minimum, maximum, etc.) en double-cliquant sur "Valeur/hab (USD PPA courant)" dans la zone "Champs de données", mais ce n'est pas nécessaire ici.
+- Dans **Filtres**, ajoutez "TIME_PERIOD".
+
+Cliquez sur "OK".
+Le tableau croisé dynamique est maintenant affiché, mais pas encore filtré sur l'année 2024.
+Cliquez sur l'icône triangulaire à côté de la cellule "TIME_PERIOD", et ne sélectionnez que l'année 2024.
+
+![Gif illustrant la création du tableau croisé dynamique dans LibreOffice Calc](img/libreoffice/pivot_table.gif)`,
         `Pour trouver facilement le pays avec le budget par habitant le plus élevé, il faut trier le tableau.
 
-Pour trier le tableau croisé dynamique, retrouvez l'élément "Zone de référence" dans la zone "Lignes" du panneau de configuration,
+**Google Sheets**
+
+Retrouvez l'élément "Zone de référence" dans la zone "Lignes" du panneau de configuration,
 et changez l'option "Trier par".
 
-![Gif illustrant le tri du tableau croisé dynamique](img/sheets/sort_pivot_table.gif)`,
+![Gif illustrant le tri du tableau croisé dynamique dans Google Sheets](img/sheets/sort_pivot_table.gif)
+
+**LibreOffice Calc**
+
+Faites un clic droit dans le tableau croisé dynamique, puis cliquez sur "Propriétés...", cela va réouvrir le panneau de configuration du tableau.
+Faites un double clic sur "Zone de référence" dans la zone "Champs de ligne", puis cliquez sur "Options..." (en bas de la nouvelle fenêtre).
+
+Finalement, dans le menu déroulant "Trier par", sélectionnez "Somme - Valeur/hab (USD PPA courant)" puis cliquez sur "OK" dans chaque fenêtre jusqu'à revenir au tableau.
+
+![Gif illustrant le tri du tableau croisé dynamique dans LibreOffice Calc](img/libreoffice/sort_pivot_table.gif)`,
       ],
     },
     {
@@ -371,9 +412,17 @@ Ouvrez le prochain indice pour en savoir plus.`,
 Il faut maintenant compter le nombre de valeurs négatives dans cette colonne.
 
 Vous pouvez le faire manuellement, mais c'est l'occasion de découvrir une autre fonctionnalité des tableurs : la mise en forme conditionnelle.
-Dans Google Sheets, sélectionnez la colonne avec les différences et allez dans le menu **Format > Mise en forme conditionnelle**.
 
-![Gif illustrant la mise en forme conditionnelle](img/sheets/mise_en_forme_condi.gif)`,
+Dans **Google Sheets**, sélectionnez la colonne avec les différences et allez dans le menu **Format > Mise en forme conditionnelle**.
+
+![Gif illustrant la mise en forme conditionnelle](img/sheets/mise_en_forme_condi.gif)
+
+Dans **LibreOffice Calc**, sélectionnez les valeurs à formatter, puis cliquez sur le bouton "Conditionnel" dans l'onglet "Origine".
+Dans le menu qui s'affiche, choisissez "Condition..." puis "Inférieur à...".
+
+Une nouvelle fenêtre s'ouvre, indiquez "0" comme valeur de référence, puis cliquez sur "OK".
+
+![Gif illustrant la mise en forme conditionnelle dans LibreOffice Calc](img/libreoffice/mise_en_forme_condi.gif)`,
       ],
     },
     {
@@ -401,22 +450,45 @@ mais seulement 0,7 % était consacré à l'objectif "Environnement".`,
 
 Par défaut, le tableau montre directement les valeurs, mais ce qui vous intéresse c'est le pourcentage que cette valeur représente du budget total du pays.
 Il est possible de configurer le tableau pour afficher cela, mais comment ?`,
-        `Dans la zone Valeur, modifiez l'option "Afficher en tant que" pour choisir "Pourcentage du total d'une ligne"
+        `**Google Sheets**
+
+Dans la zone Valeur, modifiez l'option "Afficher en tant que" pour choisir "Pourcentage du total d'une ligne"
 (ou "Pourcentage du total d'une colonne" si vous avez mis les pays en colonnes et les objectifs en lignes).
 
 ![Gif illustrant le choix de l'option "Pourcentage du total d'une ligne"](img/sheets/pivot_perc.gif)
+
+**LibreOffice Calc**
+
+Double-cliquez sur "Somme - Valeur (USD PPA constant)" dans la zone "Champs de données".
+Dans la fenêtre qui s'ouvre, cliquez sur "Valeur affichée" pour afficher plus d'options,
+puis sélectionnez "% de la ligne" comme "Type". Cliquez sur "OK" pour valider.
+
+![Gif illustrant le choix de l'option "Pourcentage du total d'une ligne" dans LibreOffice Calc](img/libreoffice/pivot_perc.gif)
+
+**Et après ?**
 
 Maintenant, chaque ligne somme à 100 % du budget, et chaque case donne le pourcentage du budget total du pays pour cet objectif.
 
 Il reste à trouver quel pays a le pourcentage le plus élevé pour l'objectif "Environnement".
 Là encore, la mise en forme conditionnelle peut aider.`,
-        `Sélectionnez la colonne "Environnement" et appliquez une mise en forme conditionnelle.
+        `**Google Sheets**
+
+Sélectionnez la colonne "Environnement" et appliquez une mise en forme conditionnelle.
 Le menu de mise en forme conditionnelle s'ouvre par défaut sur l'onglet "Couleur unie".
 Cliquez à la place sur l'onglet "Dégradé de couleur", gardez les options par défaut et cliquez sur OK.
 
 Les cases de cette colonne sont maintenant colorées d'un vert d'autant plus intense que la valeur de la case est élevée.
 
 ![Gif illustrant la mise en forme conditionnelle avec un dégradé de couleur](img/sheets/degrade_couleur.gif)
+
+**LibreOffice Calc**
+
+Sélectionnez la colonne "Environnement", puis cliquez sur le bouton "Conditionnel" dans l'onglet "Origine".
+Dans le menu qui s'affiche, choisissez "Échelle de couleurs...".
+
+Une nouvelle fenêtre s'ouvre, gardez les valeurs par défaut et cliquez sur "OK".
+
+![Gif illustrant le choix de l'option "Pourcentage du total d'une ligne" dans LibreOffice Calc](img/libreoffice/degrade_couleur.gif)
 `,
       ],
     },
