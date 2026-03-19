@@ -21,7 +21,8 @@
             <div>
                 <h1 x-text="config.title || 'Quiz Overview'"></h1>
                 <div class="subtitle">
-                    live overview &nbsp;·&nbsp;
+                    <span x-text="participants.length"></span> participant·es
+                    &nbsp;·&nbsp;
                     <span x-text="config.questions.length"></span> questions
                 </div>
             </div>
