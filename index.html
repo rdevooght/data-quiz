@@ -28,6 +28,11 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.1/cdn.min.js"
         ></script>
 
+        <!-- Avatar icon -->
+        <script type="module">
+            import { minidenticonSvg } from "https://cdn.jsdelivr.net/npm/minidenticons@4.2.1/minidenticons.min.js";
+        </script>
+
         <!-- Quiz config (must come before Alpine initialises) -->
         <script src="config.js"></script>
         <link rel="stylesheet" href="style.css" />
@@ -51,13 +56,24 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <h4 class="mb-0 fw-bold" x-text="config.title"></h4>
-                        <small
+                        <div
                             class="opacity-75"
                             x-show="screen === 'quiz'"
                             x-cloak
                         >
-                            <span x-text="name"></span>
-                        </small>
+                            <span
+                                class="d-inline-flex align-items-center gap-1"
+                            >
+                                <span class="name-avatar" aria-hidden="true">
+                                    <minidenticon-svg
+                                        :username="avatarSeed"
+                                        saturation="80"
+                                        lightness="46"
+                                    ></minidenticon-svg>
+                                </span>
+                                <span x-text="name"></span>
+                            </span>
+                        </div>
                     </div>
                     <button
                         type="button"

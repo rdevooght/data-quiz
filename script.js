@@ -95,6 +95,12 @@ function quizApp() {
       return this.config.questions[this.currentIndex] ?? null;
     },
 
+    get avatarSeed() {
+      if (this.personId) return `id-${this.personId}`;
+      if (this.name) return this.name;
+      return "anonymous";
+    },
+
     get progress() {
       const total = this.config.questions.length || 1;
       const answered = Math.min(this.answers.length, total);

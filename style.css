@@ -21,6 +21,19 @@ body {
     padding: 1rem;
 }
 
+.name-avatar {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name-avatar minidenticon-svg svg {
+    width: 24px;
+    height: 24px;
+}
+
 .card-body {
     padding: 1rem;
 }
