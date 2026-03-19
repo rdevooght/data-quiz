@@ -256,7 +256,12 @@
                 </div>
 
                 <!-- Hints (native <details>) -->
-                <div class="mt-4" x-show="currentHints.length" x-cloak>
+                <div
+                    class="mt-4"
+                    x-show="currentHints.length"
+                    x-cloak
+                    x-ref="hintList"
+                >
                     <template
                         x-for="(hint, hintIndex) in currentHints"
                         :key="hintIndex"

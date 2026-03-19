@@ -1,4 +1,3 @@
-- close hints when moving to next question
 - les boutons questions précédentes et suivantes ne fonctionnent pas quand le quiz est terminé
 - ajouter une outro et passage manuel à la question suivante
 - revoir le design

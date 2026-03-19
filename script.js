@@ -164,7 +164,10 @@ function quizApp() {
       }
 
       this.syncAnswerForCurrent();
-      this.$watch("currentIndex", () => this.syncAnswerForCurrent());
+      this.$watch("currentIndex", () => {
+        this.syncAnswerForCurrent();
+        this.closeHints();
+      });
     },
 
     // ── Actions ─────────────────────────────────
@@ -317,6 +320,16 @@ function quizApp() {
       } else {
         this.answer = "";
       }
+    },
+
+    closeHints() {
+      this.$nextTick(() => {
+        const hintList = this.$refs.hintList;
+        if (!hintList) return;
+        hintList.querySelectorAll("details[open]").forEach((detail) => {
+          detail.open = false;
+        });
+      });
     },
 
     focusCurrentInput() {
