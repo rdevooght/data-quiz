@@ -266,6 +266,9 @@ function quizApp() {
     goPrev() {
       if (!this.canGoPrev) return;
       this.currentIndex--;
+      if (this.screen === "done") {
+        this.screen = "quiz";
+      }
       this.liveMessage = `Question ${this.currentIndex + 1} sur ${this.config.questions.length}.`;
       this.saveProgress();
     },
@@ -273,9 +276,15 @@ function quizApp() {
     goNext() {
       if (!this.canGoNext) return;
       this.currentIndex++;
-      this.liveMessage = `Question ${this.currentIndex + 1} sur ${this.config.questions.length}.`;
+      if (this.currentIndex >= this.config.questions.length) {
+        this.screen = "done";
+        this.liveMessage = "Quiz terminé. Félicitations.";
+      } else {
+        this.screen = "quiz";
+        this.liveMessage = `Question ${this.currentIndex + 1} sur ${this.config.questions.length}.`;
+        this.focusCurrentInput();
+      }
       this.saveProgress();
-      this.focusCurrentInput();
     },
 
     getErrorHintMessage(rawAnswer) {
