@@ -43,5 +43,11 @@ function overviewApp() {
       if (p.num_correct == null) return 0;
       return Math.min(p.num_correct / total, 1);
     },
+
+    avatarSeed(p) {
+      if (p.person_id != null) return `id-${p.person_id}`;
+      if (p.person_name) return p.person_name;
+      return "anonymous";
+    },
   };
 }

@@ -10,13 +10,14 @@
     --bg: #0e0e0e;
     --surface: #161616;
     --border: #272727;
-    --text: #e8e8e8;
-    --muted: #555;
+    --text: white;
+    --muted: #e8e8e8;
     --accent: #e8ff47; /* single pop of colour */
     --finish: #ff6b3d;
     --track: #1c1c1c;
     --dot-size: 10px;
     --row-h: 56px;
+    --avatar-size: 46px;
 }
 
 body {
@@ -79,16 +80,10 @@ h1 {
 /* Column labels */
 .track-labels {
     display: grid;
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: 1fr;
     gap: 0 16px;
     margin-bottom: 10px;
     padding: 0 0 0 0;
-}
-.label-name {
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
 }
 .label-track {
     font-size: 0.65rem;
@@ -97,6 +92,24 @@ h1 {
     color: var(--muted);
     display: flex;
     justify-content: space-between;
+}
+
+/* Question axis */
+.question-axis {
+    position: relative;
+    height: 24px;
+    margin-bottom: 8px;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+.question-tick {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 /* Divider */
@@ -109,7 +122,7 @@ h1 {
 /* Each row */
 .participant-row {
     display: grid;
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: 1fr;
     gap: 0 16px;
     align-items: center;
     height: var(--row-h);
@@ -118,19 +131,6 @@ h1 {
 }
 .participant-row:hover {
     background: var(--surface);
-}
-
-.p-name {
-    font-size: 0.85rem;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--text);
-}
-.p-name.unnamed {
-    color: var(--muted);
-    font-style: italic;
 }
 
 /* The race track */
@@ -167,19 +167,31 @@ h1 {
     transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.runner-dot {
-    width: var(--dot-size);
-    height: var(--dot-size);
+.runner-avatar {
+    width: var(--avatar-size);
+    height: var(--avatar-size);
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--surface);
+    border: 2px solid var(--border);
+    display: grid;
+    place-items: center;
     flex-shrink: 0;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
 }
-.runner-dot.at-finish {
-    background: var(--finish);
+.runner-avatar.at-finish {
+    border-color: var(--finish);
 }
-.runner-dot.not-started {
-    background: transparent;
-    border: 2px solid var(--muted);
+.runner-avatar.not-started {
+    opacity: 0.75;
+    filter: grayscale(0.4);
+}
+.runner-avatar minidenticon-svg svg {
+    width: calc(var(--avatar-size) - 10px);
+    height: calc(var(--avatar-size) - 10px);
+    display: block;
+    border-radius: 6px;
 }
 
 /* Progress trail */
@@ -199,13 +211,38 @@ h1 {
 /* Q label on dot */
 .q-label {
     position: absolute;
-    top: calc(50% - 18px);
+    top: calc(50% - 28px);
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.58rem;
     color: var(--muted);
     letter-spacing: 0.06em;
     white-space: nowrap;
+}
+
+.p-tooltip {
+    position: absolute;
+    top: calc(50% + 22px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+}
+.runner-wrap:hover .p-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(2px);
 }
 
 /* Empty / error states */
