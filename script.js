@@ -77,7 +77,7 @@ function quizApp() {
 
     // ── State ───────────────────────────────────
     screen: "name", // 'name' | 'quiz' | 'done'
-    name: "",
+    name: "anonyme",
     personId: null,
     currentIndex: 0,
     answer: "",

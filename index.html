@@ -56,7 +56,7 @@
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <h4 class="mb-0 fw-bold" x-text="config.title"></h4>
-                        <div
+                        <!--<div
                             class="opacity-75"
                             x-show="screen === 'quiz'"
                             x-cloak
@@ -73,7 +73,7 @@
                                 </span>
                                 <span x-text="name"></span>
                             </span>
-                        </div>
+                        </div>-->
                     </div>
                     <button
                         type="button"
@@ -140,11 +140,21 @@
             <!-- ── Name Screen ─────────────────────────────── -->
             <div class="card-body" x-show="screen === 'name'">
                 <h5 class="mb-1">Bienvenue !</h5>
-                <p class="text-muted mb-4">
-                    Entrez votre nom pour commencer le quiz.
+                <p>
+                    Ce quiz va vous guider pas à pas à travers les principales
+                    fonctionnalités des tableurs. Pour le faire, il vous faut un
+                    tableur (LibreOffice Calc, Google Sheets, Excel, ...) et
+                    télécharger le fichier de données à la prochaine page.
+                </p>
+                <p>
+                    Il y aura des indices tout au long du quiz, avec des démo
+                    pour trouver les solutions dans LibreOffice ou Google
+                    Sheets. Vous pouvez aussi utiliser Excel, mais sachez que
+                    certaines fonctionnalités ont des noms légèrements
+                    différents, et que l'interface diffère elle aussi.
                 </p>
 
-                <div class="mb-3">
+                <!--<div class="mb-3">
                     <label class="form-label fw-semibold" for="name-input"
                         >Votre nom</label
                     >
@@ -158,7 +168,9 @@
                         autocomplete="name"
                         autofocus
                     />
-                </div>
+                </div>-->
+
+                <input id="name-input" type="hidden" x-model="name" />
 
                 <button
                     type="button"
