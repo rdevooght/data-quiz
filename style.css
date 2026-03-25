@@ -76,11 +76,11 @@ details > summary::-webkit-details-marker {
     display: none;
 }
 
-details > summary.btn::before {
+details.hint > summary.btn::before {
     content: "💡 Afficher l'indice";
 }
 
-details[open] > summary.btn::before {
+details[open].hint > summary.btn::before {
     content: "▲ Masquer l'indice";
 }
 
@@ -90,6 +90,21 @@ details .hint-box {
 }
 details .hint-box img {
     cursor: zoom-in;
+}
+
+/* <details> solution styling */
+details.solution {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+details.solution > summary.btn::before {
+    content: "Afficher la ";
+}
+
+details[open].solution > summary.btn::before {
+    content: "Masquer la ";
 }
 
 /* Progress bar */

@@ -340,10 +340,16 @@ function quizApp() {
     closeHints() {
       this.$nextTick(() => {
         const hintList = this.$refs.hintList;
-        if (!hintList) return;
-        hintList.querySelectorAll("details[open]").forEach((detail) => {
-          detail.open = false;
-        });
+        if (hintList) {
+          hintList.querySelectorAll("details[open]").forEach((detail) => {
+            detail.open = false;
+          });
+        }
+
+        const solution = this.$refs.solution;
+        if (solution) {
+          solution.open = false;
+        }
       });
     },
 

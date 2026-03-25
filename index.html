@@ -295,7 +295,7 @@
                         x-for="(hint, hintIndex) in currentHints"
                         :key="hintIndex"
                     >
-                        <details class="mb-2">
+                        <details class="mb-2 hint">
                             <summary class="btn btn-sm btn-outline-secondary">
                                 <span
                                     x-text="currentHints.length > 1
@@ -315,6 +315,20 @@
                         </details>
                     </template>
                 </div>
+
+                <details
+                    class="mb-2 mt-4 solution"
+                    x-show="currentQuestion.answer"
+                    x-ref="solution"
+                >
+                    <summary class="btn btn-sm btn-outline-secondary">
+                        <span>solution</span>
+                    </summary>
+                    <div
+                        class="ml-2 p-1 hint-box"
+                        x-text="currentQuestion.answer"
+                    ></div>
+                </details>
             </div>
 
             <!-- ── Done Screen ─────────────────────────────── -->
