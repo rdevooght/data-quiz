@@ -7,6 +7,7 @@ const UUID_KEY = "quizPersonId";
 const QUIZ_ID = 0;
 const API_BASE = "https://data-quizz.robin-de.workers.dev";
 const DEFAULT_WRONG_ANSWER_MESSAGE = "✗ Ce n'est pas ça — réessayez !";
+const DEFAULT_NAME = "anonyme";
 
 // ── API helpers (fire-and-forget, errors only logged) ──
 
@@ -77,7 +78,7 @@ function quizApp() {
 
     // ── State ───────────────────────────────────
     screen: "name", // 'name' | 'quiz' | 'done'
-    name: "anonyme",
+    name: DEFAULT_NAME,
     personId: null,
     currentIndex: 0,
     answer: "",
@@ -260,7 +261,7 @@ function quizApp() {
       // Issue a fresh UUID so the new session is tracked independently
       this.personId = resetPersonId();
       this.screen = "name";
-      this.name = "";
+      this.name = DEFAULT_NAME;
       this.currentIndex = 0;
       this.answer = "";
       this.answers = [];
