@@ -3,6 +3,7 @@ const quizConfig = {
 
   questions: [
     {
+      solution_file: "Budget-R-et-D - Q1.xlsx",
       intro: `Commencer par télécharger le fichier suivant: [Budget-R-et-D.csv](data/Budget-R-et-D.csv).
 
 Il s'agit d'un fichier contenant des informations sur les budgets R&D de différents pays entre 2014 et 2024.
@@ -52,6 +53,7 @@ Faites un clic droit sur cette zone et ajoutez "Compte de la sélection" aux sta
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q2.xlsx",
       intro: `Maintenant que le tableau est importé, explorons un peu son contenu.
 
 Les colonnes ont des noms dans des formats variés et pas toujours explicites, mais en regardant les premières lignes vous devriez en comprendre le sens.
@@ -92,6 +94,7 @@ Attention, c'est une opération qui peut prendre du temps sur un grand nombre de
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q3.xlsx",
       intro: `Continuons d'explorer le tableau.
 La colonne "Objectif socio-économique" contient différentes catégories dans lesquelles sont classés les budgets R&D.
 `,
@@ -124,6 +127,7 @@ Dans LibreOffice l'icône ressemble à ceci : ![Icone d'une baguette magique ora
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q4.xlsx",
       intro: `Regardons maintenant les colonnes suivantes :
 - "TIME_PERIOD" contient des années
 - "Valeur (monnaie nationale)" contient un montant exprimé dans la devise spécifiée par les colonnes "CURRENCY" et "Monnaie".
@@ -151,6 +155,7 @@ Il faut donc multiplier les valeurs par 1 million pour obtenir la réponse corre
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q4.xlsx",
       intro: `Les données prises isolément sont rarement parlantes.
 Il est plus intéressant de comparer des valeurs entre elles.
 `,
@@ -179,6 +184,7 @@ mais souvenez-vous qu'il ne s'agit que d'un exemple : les observations que vous 
 `,
     },
     {
+      solution_file: "Budget-R-et-D - Q4.xlsx",
       intro: `Par simplicité, dans la suite, nous allons ignorer les colonnes "Statut d'observation",
 mais souvenez-vous qu'il ne s'agit que d'un exemple : les observations que vous allez faire ne correspondent pas nécessairement à la réalité.
 
@@ -225,13 +231,14 @@ Ce n'est pas nécessaire dans notre cas, car dans ce dataset les points n'appara
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q7.xlsx",
       intro: `L'Islande avait donc le plus petit budget pour l'objectif 'Santé' en 2020.
 Mais c'est un petit pays, ce n'est donc pas étonnant que son budget soit faible.
 
 Intéressons-nous à la colonne "population" pour voir si cela peut expliquer la place de l'Islande dans le classement.`,
       question: "Quel pays avait la plus petite population en 2020 ?",
       answer_type: "text",
-      answer: "islande",
+      answer: "Islande",
       error_hints: {
         "pays-bas": `Les Pays-Bas n'auraient une population que de 174 415 personnes ? Je crois qu'il y a une erreur dans les données ! Regardez l'indice #1`,
       },
@@ -258,6 +265,7 @@ Pour éviter cela, vous pouvez commencer par écrire la même valeur dans les de
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q8.xlsx",
       intro: `Ce n'est pas très surprenant d'apprendre que c'est le pays le moins peuplé qui a le plus petit budget.
 Il serait plus intéressant de comparer les pays par rapport à leur budget *par habitant*.
 
@@ -289,6 +297,7 @@ Quand vous aurez saisi la formule, Google Sheets vous proposera de la remplir au
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q9.xlsx",
       intro: `Pour la question suivante, basez-vous sur la colonne "Valeur (monnaie nationale)"`,
       question: `Quel a été le budget R&D total de la Belgique en 2024 (en *millions* d'euros) ?`,
       answer_type: "number",
@@ -310,6 +319,7 @@ Vous pouvez cliquer sur cette information pour afficher d'autres statistiques, p
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q10.xlsx",
       intro: `On a vu comment obtenir le budget total pour un pays, mais il serait utile de pouvoir calculer ce total pour chaque pays afin de pouvoir les comparer.
 Pour ce genre d'opération, les tableurs offrent un outil très puissant : les **tableaux croisés dynamiques** (ou *pivot tables* en anglais).
 
@@ -319,7 +329,7 @@ et en agrégeant pour chaque groupe les valeurs d'une autre colonne (par exemple
       question: `Quel pays avait le budget R&D total **par habitant** le plus élevé en 2024 ?`,
 
       answer_type: "text",
-      answer: "luxembourg",
+      answer: "Luxembourg",
       error_hints: {
         "États-Unis":
           "On s'intéresse ici au budget par habitant, pas au budget total.",
@@ -381,6 +391,7 @@ Finalement, dans le menu déroulant "Trier par", sélectionnez "Somme - Valeur/h
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q11.xlsx",
       intro: `Continuons avec les tableaux croisés dynamiques.
 Il est possible de grouper les données par plusieurs critères en utilisant aussi les colonnes du tableau croisé dynamique.
 
@@ -426,6 +437,7 @@ Une nouvelle fenêtre s'ouvre, indiquez "0" comme valeur de référence, puis cl
       ],
     },
     {
+      solution_file: "Budget-R-et-D - Q12.xlsx",
       intro: `Jusqu'à présent, on a comparé les investissements des pays en comparant directement les montants ou les montants par habitant,
 mais il est aussi intéressant d'analyser quelle part du budget R&D total est dirigée vers tel ou tel secteur.
 Cela donne une idée des priorités de R&D pour chaque pays.

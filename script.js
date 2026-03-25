@@ -96,6 +96,10 @@ function quizApp() {
       return this.config.questions[this.currentIndex] ?? null;
     },
 
+    get previousQuestion() {
+      return this.config.questions[this.currentIndex - 1] ?? null;
+    },
+
     get avatarSeed() {
       if (this.personId) return `id-${this.personId}`;
       if (this.name) return this.name;

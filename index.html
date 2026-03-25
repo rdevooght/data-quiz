@@ -186,6 +186,12 @@
             <div class="card-body" x-show="screen === 'quiz'" x-cloak>
                 <!-- Question -->
 
+                <p x-show="canGoPrev" class="small text-secondary">
+                    💡 A ce stade, votre fichier devrait ressembler à ceci:
+                    <a :href="previousQuestion.solution_file"
+                        >Télécharger le fichier</a
+                    >
+                </p>
                 <p
                     x-show="currentQuestion.intro"
                     x-html="marked.parse(currentQuestion.intro)"
@@ -324,10 +330,17 @@
                     <summary class="btn btn-sm btn-outline-secondary">
                         <span>solution</span>
                     </summary>
-                    <div
-                        class="ml-2 p-1 hint-box"
-                        x-text="currentQuestion.answer"
-                    ></div>
+                    <div class="ml-2 p-1 hint-box">
+                        <span x-text="currentQuestion.answer"></span>
+                        <br />
+                        <span class="small text-secondary">
+                            (A la fin de cette question, votre fichier devrait
+                            ressembler à ceci:
+                            <a :href="currentQuestion.solution_file"
+                                >Télécharger le fichier</a
+                            >)</span
+                        >
+                    </div>
                 </details>
             </div>
 
