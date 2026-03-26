@@ -202,6 +202,8 @@ Remarquez qu'il y a 3 colonnes de "Valeur" :
       error_hints: {
         lituanie: `Bien essayé, mais il y a sans doute un problème avec le formatage des valeurs... regardez l'indice #2`,
         estonie: `L'Estonie a bien la plus petite valeur exprimée en monnaie nationale, mais pour comparer les pays entre eux, il faut utiliser la valeur en USD PPA.`,
+        "États-Unis": `Est-ce que vous utilisez Excel sur Windows ? Il y a probablement eu un problème lors de l'importation des données... Excel rend les choses plus compliquées que LibreOffice ou Google Sheets. Je vous recommande de télécharger ce fichier-ci qui contient les données correctement importées au format Excel: [Budget-R-et-D.xlsx](data/Budget-R-et-D%20-%20Q7.xlsx)`,
+        USA: `Est-ce que vous utilisez Excel sur Windows ? Il y a probablement eu un problème lors de l'importation des données... Excel rend les choses plus compliquées que LibreOffice ou Google Sheets. Je vous recommande de télécharger ce fichier-ci qui contient les données correctement importées au format Excel: [Budget-R-et-D.xlsx](data/Budget-R-et-D%20-%20Q7.xlsx)`,
       },
       hints: [
         `Commencez par filtrer les colonnes "Objectif socio-économique" et "TIME_PERIOD" pour ne garder que les budgets de Santé de 2020.
