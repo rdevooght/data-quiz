@@ -4,7 +4,7 @@ const quizConfig = {
   questions: [
     {
       solution_file: "Budget-R-et-D - Q1.xlsx",
-      intro: `Commencer par télécharger le fichier suivant: [Budget-R-et-D.csv](data/Budget-R-et-D.csv).
+      intro: `Commencez par télécharger le fichier suivant: [Budget-R-et-D.csv](data/Budget-R-et-D.csv).
 
 Il s'agit d'un fichier contenant des informations sur les budgets R&D de différents pays entre 2014 et 2024.
 Les données de base proviennent de l'[OCDE](https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CScience%252C%20technology%20and%20innovation%23INT%23%7CResearch%20and%20development%20(R%26D)%23INT_RD%23&pg=0&fc=Topic&bp=true&snb=19&vw=tb&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_RDS_GOV%40DF_GBARD_NABS07&df[ag]=OECD.STI.STP&df[vs]=1.0&dq=.A.....XDC.&pd=2015%2C&to[TIME_PERIOD]=false&isAvailabilityDisabled=false),
