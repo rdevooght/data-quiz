@@ -237,7 +237,7 @@
 
                 <p x-show="canGoPrev" class="small text-secondary">
                     💡 A ce stade, votre fichier devrait ressembler à ceci:
-                    <a :href="previousQuestion.solution_file"
+                    <a :href="`data/${previousQuestion.solution_file}`"
                         >Télécharger le fichier</a
                     >
                 </p>
@@ -385,7 +385,7 @@
                         <span class="small text-secondary">
                             (A la fin de cette question, votre fichier devrait
                             ressembler à ceci:
-                            <a :href="currentQuestion.solution_file"
+                            <a :href="`data/${currentQuestion.solution_file}`"
                                 >Télécharger le fichier</a
                             >)</span
                         >
